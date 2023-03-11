@@ -1,0 +1,32 @@
+service: apollo-lambda
+
+package:
+  individually: false
+
+custom:
+  serverless-offline:
+    useChildProcesses: true
+  bundle:
+    linting: false
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  httpApi:
+    cors: true
+
+functions:
+  graphql:
+    handler: src/index.handler
+    events:
+      - httpApi:
+          path: /
+          method: POST
+      - httpApi:
+          path: /
+          method: GET
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-bundle
+  - serverless-offline

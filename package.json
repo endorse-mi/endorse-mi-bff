@@ -2,10 +2,9 @@
   "name": "endorse-mi-bff",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "ts-node src/index.ts",
+    "serve": "serverless offline start",
     "lint": "eslint \"./**/*.{js,ts}\" --fix",
     "format": "prettier \"./**/*.{js,ts}\" --write --config ./.prettierrc"
   },
@@ -13,9 +12,13 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/server": "^4.5.0",
+    "@as-integrations/aws-lambda": "^2.0.1",
+    "@graphql-tools/merge": "^8.4.0",
+    "@graphql-tools/utils": "^9.2.1",
     "graphql": "^16.6.0"
   },
   "devDependencies": {
+    "@types/node": "^18.15.0",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.7.0",
@@ -25,7 +28,9 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.0.0",
     "prettier": "^2.8.4",
-    "ts-node": "^10.9.1",
+    "serverless-bundle": "^6.0.0",
+    "serverless-offline": "^12.0.4",
+    "serverless-plugin-typescript": "^2.1.4",
     "typescript": "^4.9.5"
   }
 }
