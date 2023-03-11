@@ -1,0 +1,19 @@
+{
+  "name": "endorse-mi-bff",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "ts-node src/index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "^4.5.0",
+    "graphql": "^16.6.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1"
+  }
+}
