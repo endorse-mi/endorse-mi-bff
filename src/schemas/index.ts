@@ -1,3 +1,10 @@
 import { userSchemas } from './user';
 
-export const typeDefs = [...userSchemas];
+const commonSchema = `#graphql
+  interface BaseResponse {
+    success: Boolean!
+    message: String!
+  }
+`;
+
+export const typeDefs = [commonSchema, ...userSchemas];
