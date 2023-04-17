@@ -1,3 +1,4 @@
+import { postSchemas } from './post';
 import { userSchemas } from './user';
 
 const commonSchema = `#graphql
@@ -7,4 +8,4 @@ const commonSchema = `#graphql
   }
 `;
 
-export const typeDefs = [commonSchema, ...userSchemas];
+export const typeDefs = [commonSchema, ...userSchemas, ...postSchemas];

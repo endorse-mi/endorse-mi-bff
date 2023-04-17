@@ -16,14 +16,49 @@ provider:
     cors: true
 
 functions:
-  graphql:
-    handler: src/index.handler
+  sign-in:
+    handler: src/rest/auth/sign-in.handler
     events:
       - httpApi:
-          path: /
+          path: /sign-in
+          method: POST
+
+  sign-up:
+    handler: src/rest/auth/sign-up.handler
+    events:
+      - httpApi:
+          path: /sign-up
+          method: POST
+
+  confirm-sign-up:
+    handler: src/rest/auth/confirm-sign-up.handler
+    events:
+      - httpApi:
+          path: /confirm-sign-up
+          method: POST
+
+  forgot-password:
+    handler: src/rest/auth/forgot-password.handler
+    events:
+      - httpApi:
+          path: /forgot-password
+          method: POST
+
+  forgot-password-submit:
+    handler: src/rest/auth/forgot-password-submit.handler
+    events:
+      - httpApi:
+          path: /forgot-password-submit
+          method: POST
+
+  graphql:
+    handler: src/graphql/index.handler
+    events:
+      - httpApi:
+          path: /graphql
           method: POST
       - httpApi:
-          path: /
+          path: /graphql
           method: GET
 
 plugins:
