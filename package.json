@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "serve": "serverless offline start",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint \"./**/*.{js,ts}\" --fix",
     "format": "prettier \"./**/*.{js,ts}\" --write --config ./.prettierrc"
   },
@@ -13,11 +13,11 @@
   "dependencies": {
     "@apollo/server": "^4.5.0",
     "@as-integrations/aws-lambda": "^2.0.1",
-    "@aws-sdk/client-dynamodb": "^3.292.0",
     "@graphql-tools/merge": "^8.4.0",
     "@graphql-tools/utils": "^9.2.1",
     "amazon-cognito-identity-js": "^6.1.2",
     "aws-amplify": "^5.0.19",
+    "dynamoose": "^3.2.0",
     "graphql": "^16.6.0"
   },
   "devDependencies": {

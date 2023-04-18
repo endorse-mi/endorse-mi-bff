@@ -5,10 +5,11 @@ import { ForgotPasswordRequest } from '../../rest/auth/forgot-password';
 import { ForgotPasswordSubmitRequest } from '../../rest/auth/forgot-password-submit';
 import { SignInRequest } from '../../rest/auth/sign-in';
 import { SignUpRequest } from '../../rest/auth/sign-up';
+import { createUser } from './manage';
 
 const poolData = {
-  UserPoolId: 'us-east-1_Pgspkqt3B',
-  ClientId: '76kobkt3f4m1rl37s52i57opib',
+  UserPoolId: 'us-east-1_KIHMSNLAY',
+  ClientId: '6s0jgosqonq2k57gm6pftsv2td',
 };
 
 export const userPool = new CognitoUserPool(poolData);
@@ -32,7 +33,9 @@ export const signUp = async ({ username, password, familyName, givenName, profil
     password,
   });
 
-  console.log('signed up:', user);
+  await createUser({ userId: username, familyName, givenName, profile });
+
+  console.log('signed up:', JSON.stringify(user, null, 2));
   return user;
 };
 

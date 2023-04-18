@@ -1,59 +1,38 @@
 export const userTypeSchema = `#graphql
     type User {
-        username: String
+        userId: String
+        familyName: String
+        givenName: String
+        profile: String
     }
 
-    input SignUpRequest {
-        username: String!
-        password: String!
+    input UserCreateRequest {
+        userId: String!
         familyName: String!
         givenName: String!
         profile: String!
     }
 
-    type SignUpResponse implements BaseResponse {
-        success: Boolean!
-        message: String!
+    type UserCreateResponse implements BaseResponse {
         user: User
-    }
-
-    input SignInRequest {
-        username: String!
-        password: String!
-    }
-
-    type SignInResponse implements BaseResponse {
         success: Boolean!
         message: String!
+    }
+
+    input UserUpdateRequest {
+        userId: String!
+        familyName: String
+        givenName: String
+        profile: String
+    }
+
+    type UserUpdateResponse implements BaseResponse {
         user: User
-    }
-
-    input ConfirmSignUpRequest {
-        username: String!
-        code: String!
-    }
-
-    type ConfirmSignUpResponse implements BaseResponse {
         success: Boolean!
         message: String!
     }
 
-    input ForgotPasswordRequest {
-        username: String!
-    }
-
-    type ForgotPasswordResponse implements BaseResponse {
-        success: Boolean!
-        message: String!
-    }
-
-    input ForgotPasswordSubmitRequest {
-        username: String!
-        password: String!
-        code: String!
-    }
-
-    type ForgotPasswordSubmitResponse implements BaseResponse {
+    type UserDeleteResponse implements BaseResponse {
         success: Boolean!
         message: String!
     }
