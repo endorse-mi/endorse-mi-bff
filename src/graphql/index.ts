@@ -6,6 +6,13 @@ import { typeDefs } from './schema';
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  csrfPrevention: true,
 });
 
-export const handler = startServerAndCreateLambdaHandler(server, handlers.createAPIGatewayProxyEventV2RequestHandler());
+export const handler = startServerAndCreateLambdaHandler(server, handlers.createAPIGatewayProxyEventV2RequestHandler(), {
+  middleware: [
+    async (event) => {
+      console.log('event:', event);
+    },
+  ],
+});
