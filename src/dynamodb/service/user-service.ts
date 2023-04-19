@@ -18,3 +18,10 @@ export const updateUser = async (request: UserUpdateRequest) => {
 export const deleteUser = async (id: string) => {
   await userRepository.deleteUser(id);
 };
+
+export default {
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser,
+};

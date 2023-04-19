@@ -1,4 +1,4 @@
-import { signUp } from '../../services/user/auth';
+import { signUp } from '../../service/user/auth';
 
 export interface SignUpRequest {
   username: string;

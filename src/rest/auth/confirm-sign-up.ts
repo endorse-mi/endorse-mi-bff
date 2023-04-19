@@ -1,4 +1,4 @@
-import { confirmSignUp } from '../../services/user/auth';
+import { confirmSignUp } from '../../service/user/auth';
 
 export interface ConfirmSignUpRequest {
   username: string;

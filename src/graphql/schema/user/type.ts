@@ -1,9 +1,17 @@
 export const userTypeSchema = `#graphql
     type User {
-        userId: String
-        familyName: String
-        givenName: String
-        profile: String
+        userId: String!
+        familyName: String!
+        givenName: String!
+        profile: String!
+        createdAt: String!
+        updatedAt: String!
+    }
+
+    type UserGetResponse implements BaseResponse {
+        user: User
+        success: Boolean!
+        message: String!
     }
 
     input UserCreateRequest {

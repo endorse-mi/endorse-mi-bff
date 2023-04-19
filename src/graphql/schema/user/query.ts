@@ -1,5 +1,5 @@
 export const userQuerySchema = `#graphql
     type Query {
-        user: String
+        user(id: String!): UserGetResponse
     }
 `;

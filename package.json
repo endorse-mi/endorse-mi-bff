@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "serve": "serverless offline start",
+    "serve": "serverless offline start --reloadHandler",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint \"./**/*.{js,ts}\" --fix",
     "format": "prettier \"./**/*.{js,ts}\" --write --config ./.prettierrc"
@@ -18,7 +18,8 @@
     "amazon-cognito-identity-js": "^6.1.2",
     "aws-amplify": "^5.0.19",
     "dynamoose": "^3.2.0",
-    "graphql": "^16.6.0"
+    "graphql": "^16.6.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@types/node": "^18.15.0",

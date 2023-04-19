@@ -1,4 +1,4 @@
-import { forgotPasswordSubmit } from '../../services/user/auth';
+import { forgotPasswordSubmit } from '../../service/user/auth';
 
 export interface ForgotPasswordSubmitRequest {
   username: string;

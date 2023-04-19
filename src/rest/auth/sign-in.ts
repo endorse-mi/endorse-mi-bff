@@ -1,4 +1,4 @@
-import { signIn } from '../../services/user/auth';
+import { signIn } from '../../service/user/auth';
 
 export interface SignInRequest {
   username: string;

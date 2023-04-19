@@ -5,6 +5,8 @@ export class UserModel extends Item {
   familyName = '';
   givenName = '';
   profile = '';
+  createdAt = '';
+  updatedAt = '';
 }
 
 export type UserCreateRequest = {

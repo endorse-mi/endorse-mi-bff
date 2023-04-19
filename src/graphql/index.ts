@@ -1,7 +1,7 @@
 import { ApolloServer } from '@apollo/server';
 import { handlers, startServerAndCreateLambdaHandler } from '@as-integrations/aws-lambda';
-import { resolvers } from './resolvers';
-import { typeDefs } from './schemas';
+import { resolvers } from './resolver';
+import { typeDefs } from './schema';
 
 const server = new ApolloServer({
   typeDefs,

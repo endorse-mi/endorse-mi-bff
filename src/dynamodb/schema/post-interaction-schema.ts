@@ -28,6 +28,7 @@ export const PostInteractionSchema = new Schema(
               storage: 'iso',
             },
           },
+          get: (value: string) => new Date(value).toISOString(),
         },
       },
       updatedAt: {
@@ -38,6 +39,7 @@ export const PostInteractionSchema = new Schema(
               storage: 'iso',
             },
           },
+          get: (value: string) => new Date(value).toISOString(),
         },
       },
     },

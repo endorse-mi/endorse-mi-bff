@@ -41,6 +41,7 @@ export const UserSchema = new Schema(
               storage: 'iso',
             },
           },
+          get: (value: string) => new Date(value).toISOString(),
         },
       },
       updatedAt: {
@@ -51,6 +52,7 @@ export const UserSchema = new Schema(
               storage: 'iso',
             },
           },
+          get: (value: string) => new Date(value).toISOString(),
         },
       },
     },
