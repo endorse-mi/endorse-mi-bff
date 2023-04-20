@@ -12,54 +12,57 @@ custom:
 provider:
   name: aws
   runtime: nodejs18.x
-  httpApi:
-    cors: true
+  stage: bff
 
 functions:
   sign-in:
     handler: src/rest/auth/sign-in.handler
     events:
-      - httpApi:
+      - http:
           path: /sign-in
           method: POST
+          cors: true
 
   sign-up:
     handler: src/rest/auth/sign-up.handler
     events:
-      - httpApi:
+      - http:
           path: /sign-up
           method: POST
+          cors: true
 
   confirm-sign-up:
     handler: src/rest/auth/confirm-sign-up.handler
     events:
-      - httpApi:
+      - http:
           path: /confirm-sign-up
           method: POST
+          cors: true
 
   forgot-password:
     handler: src/rest/auth/forgot-password.handler
     events:
-      - httpApi:
+      - http:
           path: /forgot-password
           method: POST
+          cors: true
 
   forgot-password-submit:
     handler: src/rest/auth/forgot-password-submit.handler
     events:
-      - httpApi:
+      - http:
           path: /forgot-password-submit
           method: POST
+          cors: true
 
   graphql:
     handler: src/graphql/index.handler
     events:
-      - httpApi:
+      - http:
           path: /graphql
           method: POST
-      - httpApi:
-          path: /graphql
-          method: GET
+          cors: true
+          integration: lambda-proxy
 
 plugins:
   - serverless-plugin-typescript

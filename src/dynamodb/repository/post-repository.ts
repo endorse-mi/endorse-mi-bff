@@ -8,7 +8,7 @@ export default class PostRepository {
   private readonly postEntity: Model<PostModel>;
 
   constructor() {
-    this.postEntity = dynamoose.model<PostModel>('post-table-prod', PostSchema);
+    this.postEntity = dynamoose.model<PostModel>('post-table-prod', PostSchema, { create: false, waitForActive: false });
   }
 
   getPostById = async (id: string) => {

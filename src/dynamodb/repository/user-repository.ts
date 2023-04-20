@@ -7,7 +7,8 @@ export default class UserRepository {
   private readonly userEntity: Model<UserModel>;
 
   constructor() {
-    this.userEntity = dynamoose.model<UserModel>('user-table-prod', UserSchema);
+    // Set { create: false, waitForActive: false } so that the function doesn't need CreateTable and DescribeTable permissions.
+    this.userEntity = dynamoose.model<UserModel>('user-table-prod', UserSchema, { create: false, waitForActive: false });
   }
 
   getUserById = async (id: string) => {

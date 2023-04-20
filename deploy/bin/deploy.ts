@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+import * as cdk from 'aws-cdk-lib';
+import 'source-map-support/register';
+import { EndorseMiBffStack } from '../lib/endorse-mi-bff-stack';
+
+const app = new cdk.App();
+
+new EndorseMiBffStack(app, 'EndorseMiBffStack', {
+  env: { account: '223889111609', region: 'us-east-1' },
+});
