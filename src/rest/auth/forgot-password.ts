@@ -1,4 +1,5 @@
 import { forgotPassword } from '../../service/user/auth';
+import { commonResponseFor } from '../utils/common';
 
 export interface ForgotPasswordRequest {
   username: string;
@@ -9,14 +10,20 @@ export const handler = async (request) => {
 
   try {
     await forgotPassword(forgotPasswordRequest);
-    return {
-      success: true,
-      message: `Sent forgot password email to user ${forgotPasswordRequest.username}`,
-    };
+    return commonResponseFor({
+      statusCode: 200,
+      body: {
+        success: true,
+        message: `Sent forgot password email to user ${forgotPasswordRequest.username}`,
+      },
+    });
   } catch (err) {
-    return {
-      success: false,
-      message: err.message,
-    };
+    return commonResponseFor({
+      statusCode: 403,
+      body: {
+        success: false,
+        message: err.message,
+      },
+    });
   }
 };

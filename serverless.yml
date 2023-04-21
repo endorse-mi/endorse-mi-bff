@@ -19,7 +19,7 @@ functions:
     handler: src/rest/auth/sign-in.handler
     events:
       - http:
-          path: /sign-in
+          path: /rest/auth/sign-in
           method: POST
           cors: true
 
@@ -27,7 +27,7 @@ functions:
     handler: src/rest/auth/sign-up.handler
     events:
       - http:
-          path: /sign-up
+          path: /rest/auth/sign-up
           method: POST
           cors: true
 
@@ -35,7 +35,7 @@ functions:
     handler: src/rest/auth/confirm-sign-up.handler
     events:
       - http:
-          path: /confirm-sign-up
+          path: /rest/auth/confirm-sign-up
           method: POST
           cors: true
 
@@ -43,7 +43,7 @@ functions:
     handler: src/rest/auth/forgot-password.handler
     events:
       - http:
-          path: /forgot-password
+          path: /rest/auth/forgot-password
           method: POST
           cors: true
 
@@ -51,7 +51,7 @@ functions:
     handler: src/rest/auth/forgot-password-submit.handler
     events:
       - http:
-          path: /forgot-password-submit
+          path: /rest/auth/forgot-password-submit
           method: POST
           cors: true
 

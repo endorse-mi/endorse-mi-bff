@@ -1,4 +1,5 @@
 import { confirmSignUp } from '../../service/user/auth';
+import { commonResponseFor } from '../utils/common';
 
 export interface ConfirmSignUpRequest {
   username: string;
@@ -10,14 +11,20 @@ export const handler = async (request) => {
 
   try {
     await confirmSignUp(confirmSignUpRequest);
-    return {
-      success: true,
-      message: `Confirmed sign up for user ${confirmSignUpRequest.username}`,
-    };
+    return commonResponseFor({
+      statusCode: 200,
+      body: {
+        success: true,
+        message: `Confirmed sign up for user ${confirmSignUpRequest.username}`,
+      },
+    });
   } catch (err) {
-    return {
-      success: false,
-      message: err.message,
-    };
+    return commonResponseFor({
+      statusCode: 403,
+      body: {
+        success: false,
+        message: err.message,
+      },
+    });
   }
 };

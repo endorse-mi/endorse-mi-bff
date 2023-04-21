@@ -1,4 +1,4 @@
-import { CfnAuthorizer, Cors, EndpointType, RestApi, SecurityPolicy } from 'aws-cdk-lib/aws-apigateway';
+import { CfnAuthorizer, Cors, EndpointType, Resource, RestApi, SecurityPolicy } from 'aws-cdk-lib/aws-apigateway';
 import { Certificate } from 'aws-cdk-lib/aws-certificatemanager';
 import { ARecord, HostedZone, IHostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
 import { ApiGateway } from 'aws-cdk-lib/aws-route53-targets';
@@ -10,6 +10,9 @@ export class Foundation {
   readonly endorseMiDomain = `endorse-mi.${this.apexDomain}`;
   readonly apiDomain = `api.${this.endorseMiDomain}`;
   readonly api: RestApi;
+  readonly restResource: Resource;
+  readonly authResource: Resource;
+  readonly graphqlResource: Resource;
   readonly apiGateway: ApiGateway;
   readonly zone: IHostedZone;
   readonly aliasRecord: ARecord;
@@ -50,6 +53,10 @@ export class Foundation {
         tracingEnabled: true,
       },
     });
+
+    this.restResource = this.api.root.addResource('rest');
+    this.authResource = this.restResource.addResource('auth');
+    this.graphqlResource = this.api.root.addResource('graphql');
 
     this.cognitoAuthorizer = new CfnAuthorizer(scope, 'cognito-authorizer', {
       name: 'endorse-mi-cognito-authorizer-prod',
