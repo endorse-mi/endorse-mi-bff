@@ -1,4 +1,4 @@
-import { signIn } from '../../service/user/auth';
+import { signIn } from '../../service/auth';
 import { commonResponseFor } from '../utils/common';
 
 export interface SignInRequest {
@@ -12,15 +12,12 @@ export const handler = async (request) => {
 
   try {
     const user = await signIn(signInRequest);
-    console.log(user);
     return commonResponseFor({
       statusCode: 200,
       body: {
         success: true,
         message: `Signed in user ${signInRequest.username}`,
-        user: {
-          username: user.getUsername(),
-        },
+        user,
       },
     });
   } catch (err) {

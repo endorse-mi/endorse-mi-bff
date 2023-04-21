@@ -60,6 +60,11 @@ functions:
     events:
       - http:
           path: /graphql
+          method: GET
+          cors: true
+          integration: lambda-proxy
+      - http:
+          path: /graphql
           method: POST
           cors: true
           integration: lambda-proxy

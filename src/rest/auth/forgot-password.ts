@@ -1,4 +1,4 @@
-import { forgotPassword } from '../../service/user/auth';
+import { forgotPassword } from '../../service/auth';
 import { commonResponseFor } from '../utils/common';
 
 export interface ForgotPasswordRequest {

@@ -1,4 +1,4 @@
-import { getPostById } from '../../../dynamodb/service/post-service';
+import { getPostById } from '../../../service/post-service';
 
 export const post = async (parent: any, { id }: { id: string }) => {
   console.log('Getting post:', id);

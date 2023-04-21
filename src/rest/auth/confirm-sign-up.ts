@@ -1,4 +1,4 @@
-import { confirmSignUp } from '../../service/user/auth';
+import { confirmSignUp } from '../../service/auth';
 import { commonResponseFor } from '../utils/common';
 
 export interface ConfirmSignUpRequest {

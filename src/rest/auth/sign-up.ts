@@ -1,4 +1,4 @@
-import { signUp } from '../../service/user/auth';
+import { signUp } from '../../service/auth';
 import { commonResponseFor } from '../utils/common';
 
 export interface SignUpRequest {

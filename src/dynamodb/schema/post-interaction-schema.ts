@@ -9,13 +9,15 @@ export const PostInteractionSchema = new Schema(
       index: {
         name: 'state-index',
         rangeKey: 'state',
-        type: 'local',
       },
     },
     userId: {
       type: String,
       required: true,
       rangeKey: true,
+    },
+    state: {
+      type: String,
     },
   },
   {

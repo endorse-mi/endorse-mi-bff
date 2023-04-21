@@ -1,5 +1,5 @@
 import { PostCreateRequest } from '../../../dynamodb/model/post-model';
-import postService from '../../../dynamodb/service/post-service';
+import postService from '../../../service/post-service';
 
 export const createPost = async (parent, { request }: { request: PostCreateRequest }) => {
   console.log(`Creating post for ${request.userId}`);

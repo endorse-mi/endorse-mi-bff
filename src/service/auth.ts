@@ -1,11 +1,11 @@
 import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { Amplify, Auth } from 'aws-amplify';
-import { createUser } from '../../dynamodb/service/user-service';
-import { ConfirmSignUpRequest } from '../../rest/auth/confirm-sign-up';
-import { ForgotPasswordRequest } from '../../rest/auth/forgot-password';
-import { ForgotPasswordSubmitRequest } from '../../rest/auth/forgot-password-submit';
-import { SignInRequest } from '../../rest/auth/sign-in';
-import { SignUpRequest } from '../../rest/auth/sign-up';
+import { ConfirmSignUpRequest } from '../rest/auth/confirm-sign-up';
+import { ForgotPasswordRequest } from '../rest/auth/forgot-password';
+import { ForgotPasswordSubmitRequest } from '../rest/auth/forgot-password-submit';
+import { SignInRequest } from '../rest/auth/sign-in';
+import { SignUpRequest } from '../rest/auth/sign-up';
+import { createUser } from './user-service';
 
 const poolData = {
   UserPoolId: 'us-east-1_KIHMSNLAY',

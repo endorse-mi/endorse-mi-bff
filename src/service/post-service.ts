@@ -1,5 +1,5 @@
-import { PostCreateRequest } from '../model/post-model';
-import PostRepository from '../repository/post-repository';
+import { PostCreateRequest } from '../dynamodb/model/post-model';
+import PostRepository from '../dynamodb/repository/post-repository';
 
 const postRepository = new PostRepository();
 

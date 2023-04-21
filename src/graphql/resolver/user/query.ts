@@ -1,4 +1,4 @@
-import { getUserById } from '../../../dynamodb/service/user-service';
+import { getUserById } from '../../../service/user-service';
 
 export const user = async (parent: any, { id }: { id: string }) => {
   console.log(`Getting user by id ${id}`);

@@ -1,5 +1,5 @@
-import { UserCreateRequest, UserUpdateRequest } from '../../dynamodb/model/user-model';
-import UserRepository from '../../dynamodb/repository/user-repository';
+import { UserCreateRequest, UserUpdateRequest } from '../dynamodb/model/user-model';
+import UserRepository from '../dynamodb/repository/user-repository';
 
 const userRepository = new UserRepository();
 

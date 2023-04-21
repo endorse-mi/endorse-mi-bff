@@ -1,5 +1,5 @@
 import { UserCreateRequest, UserUpdateRequest } from '../../../dynamodb/model/user-model';
-import userService from '../../../dynamodb/service/user-service';
+import userService from '../../../service/user-service';
 
 export const createUser = async (parent, { request }: { request: UserCreateRequest }) => {
   try {

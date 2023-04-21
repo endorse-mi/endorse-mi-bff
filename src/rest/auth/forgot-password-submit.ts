@@ -1,4 +1,4 @@
-import { forgotPasswordSubmit } from '../../service/user/auth';
+import { forgotPasswordSubmit } from '../../service/auth';
 import { commonResponseFor } from '../utils/common';
 
 export interface ForgotPasswordSubmitRequest {

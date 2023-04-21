@@ -16,7 +16,7 @@ const server = new ApolloServer({
 export const handler = startServerAndCreateLambdaHandler(server, handlers.createAPIGatewayProxyEventRequestHandler(), {
   middleware: [
     async (event) => {
-      console.log('event:', event);
+      // console.log('event:', event);
     },
   ],
 });

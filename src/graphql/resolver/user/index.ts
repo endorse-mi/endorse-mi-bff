@@ -1,5 +1,5 @@
-import { createUser, deleteUser, updateUser } from './mutations';
-import { user } from './queries';
+import { createUser, deleteUser, updateUser } from './mutation';
+import { user } from './query';
 
 export const userResolvers = {
   Query: {

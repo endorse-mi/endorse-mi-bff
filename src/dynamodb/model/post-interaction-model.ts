@@ -3,10 +3,16 @@ import { Item } from 'dynamoose/dist/Item';
 export class PostInteractionModel extends Item {
   postId = '';
   userId = '';
-  state = '';
+  state? = '';
 }
 
-export type PostInteractionRequest = {
+export enum PostInteractionState {
+  CLAIMED = 'CLAIMED',
+  CONFIRMED = 'CONFIRMED',
+}
+
+export type PostInteractionUpsertRequest = {
   postId: string;
-  type: string; // CLAIM, CONFIRM, REJECT
+  userId: string;
+  state: PostInteractionState;
 };
