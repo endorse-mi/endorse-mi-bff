@@ -3,12 +3,14 @@ import { Construct } from 'constructs';
 import { Foundation } from './foundation';
 import { GraphqlFunction } from './functions/graphql/graphql-function';
 import { AuthFunctions } from './functions/rest/auth/auth-functions';
+import { Waf } from './waf';
 
 export class EndorseMiBffStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
     const foundation = new Foundation(this);
+    new Waf(this, foundation);
     new GraphqlFunction(this, foundation);
     new AuthFunctions(this, foundation);
   }

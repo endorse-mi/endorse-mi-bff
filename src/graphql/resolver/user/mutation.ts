@@ -17,7 +17,8 @@ export const createUser = async (parent, { request }: { request: UserCreateReque
   }
 };
 
-export const updateUser = async (parent, { request }: { request: UserUpdateRequest }) => {
+export const updateUser = async (parent, { request }: { request: UserUpdateRequest }, context) => {
+  console.log('context:', context);
   try {
     const user = await userService.updateUser(request);
     return {

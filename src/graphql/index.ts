@@ -17,6 +17,28 @@ export const handler = startServerAndCreateLambdaHandler(server, handlers.create
   middleware: [
     async (event) => {
       console.log('event:', event);
+      console.log('claims:', event.requestContext.authorizer?.claims);
+      // claims: {
+      //   sub: 'd5ea9b25-8bf4-4fb5-ac26-1adaff36a363',
+      //   email_verified: 'true',
+      //   iss: 'https://cognito-idp.us-east-1.amazonaws.com/us-east-1_KIHMSNLAY',
+      //   'cognito:username': 'd5ea9b25-8bf4-4fb5-ac26-1adaff36a363',
+      //   origin_jti: '1bd61133-10d7-4ffc-9476-305a2e80759c',
+      //   aud: '6s0jgosqonq2k57gm6pftsv2td',
+      //   event_id: '6e6df579-4cfc-4eef-8a6e-4c8342ea1157',
+      //   token_use: 'id',
+      //   auth_time: '1682123876',
+      //   exp: 'Sat Apr 22 01:37:56 UTC 2023',
+      //   iat: 'Sat Apr 22 00:37:56 UTC 2023',
+      //   jti: 'f435762c-8afa-4a72-b0d8-f91579badcd3',
+      //   email: 'fongchinghinstephen@gmail.com'
+      // }
     },
   ],
+  context: async ({ event }) => {
+    console.log('in context:', event.requestContext.authorizer?.claims.email);
+    return {
+      userId: event.requestContext.authorizer?.claims.email,
+    };
+  },
 });
