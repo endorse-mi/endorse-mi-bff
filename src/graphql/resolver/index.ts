@@ -1,6 +1,5 @@
-import { type IResolvers } from '@graphql-tools/utils';
-
 import { mergeResolvers } from '@graphql-tools/merge';
+import { IResolvers } from '@graphql-tools/utils';
 import { postResolvers } from './post';
 import { postInteractionResolvers } from './post-interaction';
 import { userResolvers } from './user';
