@@ -33,6 +33,16 @@ export const PostSchema = new Schema(
         return true;
       },
     },
+    maxQuota: {
+      type: Number,
+      required: true,
+      validate: (quota: number) => quota > 0,
+    },
+    remainingQuota: {
+      type: Number,
+      required: true,
+      validate: (quota: number) => quota >= 0,
+    },
   },
   {
     timestamps: {

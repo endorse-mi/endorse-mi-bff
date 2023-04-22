@@ -1,11 +1,21 @@
 import { Item } from 'dynamoose/dist/Item';
 
+export type Post = {
+  postId: string;
+  userId: string;
+  type: PostType;
+  content?: string;
+  maxQuota: number;
+  remainingQuota: number;
+};
+
 export class PostModel extends Item {
   postId = '';
   userId = '';
   type = '';
   content = '';
-  quota = 0;
+  maxQuota = 0;
+  remainingQuota = 0;
 }
 
 export enum PostType {

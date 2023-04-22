@@ -1,7 +1,6 @@
 import * as dynamoose from 'dynamoose';
 import { Model } from 'dynamoose/dist/Model';
-import { v4 as uuidv4 } from 'uuid';
-import { PostCreateRequest, PostModel } from '../model/post-model';
+import { Post, PostModel } from '../model/post-model';
 import { PostSchema } from '../schema/post-schema';
 
 export default class PostRepository {
@@ -15,8 +14,8 @@ export default class PostRepository {
     return await this.postEntity.get({ postId: id });
   };
 
-  createPost = async (request: PostCreateRequest) => {
-    return await this.postEntity.create({ postId: uuidv4(), ...request });
+  createPost = async (request: Post) => {
+    return await this.postEntity.create(request);
   };
 
   deletePost = async (id: string) => {
