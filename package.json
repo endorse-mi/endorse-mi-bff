@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "serve": "serverless offline start --reloadHandler",
+    "serve": "serverless offline start --reloadHandler | pino-pretty",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint \"./**/*.{js,ts}\" --fix",
     "format": "prettier \"./**/*.{js,ts}\" --write --config ./.prettierrc"
@@ -21,6 +21,7 @@
     "aws-amplify": "^5.0.19",
     "dynamoose": "^3.2.0",
     "graphql": "^16.6.0",
+    "pino": "^8.11.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
@@ -33,6 +34,7 @@
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.0.0",
+    "pino-pretty": "^10.0.0",
     "prettier": "^2.8.4",
     "prettier-plugin-organize-imports": "^3.2.2",
     "serverless-bundle": "^6.0.0",
