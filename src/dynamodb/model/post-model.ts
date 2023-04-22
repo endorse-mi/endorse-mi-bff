@@ -8,9 +8,14 @@ export class PostModel extends Item {
   quota = 0;
 }
 
+export enum PostType {
+  ENDORSE = 'ENDORSE',
+  RECOMMEND = 'RECOMMEND',
+}
+
 export type PostCreateRequest = {
   userId: string;
-  type: string;
+  type: PostType;
   skill?: string;
 };
 

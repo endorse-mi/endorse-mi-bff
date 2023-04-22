@@ -8,6 +8,10 @@ export const getUserById = async (id: string) => {
   return await userRepository.getUserById(id);
 };
 
+export const getUserBalanceById = async (id: string) => {
+  return await userRepository.getUserBalanceById(id);
+};
+
 export const createUser = async (request: UserCreateRequest) => {
   return await userRepository.createUser(request);
 };
@@ -23,6 +27,7 @@ export const deleteUser = async (id: string) => {
 
 export default {
   getUserById,
+  getUserBalanceById,
   createUser,
   updateUser,
   deleteUser,
