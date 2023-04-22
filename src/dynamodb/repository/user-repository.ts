@@ -16,7 +16,7 @@ export default class UserRepository {
   };
 
   createUser = async (request: UserCreateRequest) => {
-    return await this.userEntity.create(request);
+    return await this.userEntity.create({ balance: 100, ...request });
   };
 
   updateUser = async (request: UserUpdateRequest) => {

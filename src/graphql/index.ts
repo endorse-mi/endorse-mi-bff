@@ -36,9 +36,8 @@ export const handler = startServerAndCreateLambdaHandler(server, handlers.create
     },
   ],
   context: async ({ event }) => {
-    console.log('in context:', event.requestContext.authorizer?.claims.email);
     return {
-      userId: event.requestContext.authorizer?.claims.email,
+      userId: event.requestContext.authorizer?.claims?.email,
     };
   },
 });

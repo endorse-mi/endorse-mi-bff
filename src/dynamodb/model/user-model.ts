@@ -5,6 +5,7 @@ export class UserModel extends Item {
   familyName = '';
   givenName = '';
   profile = '';
+  balance = 0;
   createdAt = '';
   updatedAt = '';
 }

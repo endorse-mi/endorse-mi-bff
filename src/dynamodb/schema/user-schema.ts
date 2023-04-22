@@ -29,6 +29,10 @@ export const UserSchema = new Schema(
         return true;
       },
     },
+    balance: {
+      type: Number,
+      required: true,
+    },
   },
   {
     // createdAt & updatedAt fields in ISO format are automatically generated
