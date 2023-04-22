@@ -1,4 +1,4 @@
-import { confirmSignUp } from '../../service/auth';
+import { confirmSignUp } from '../../service/cognito-service';
 import { commonResponseFor } from '../utils/common';
 
 export interface ConfirmSignUpRequest {

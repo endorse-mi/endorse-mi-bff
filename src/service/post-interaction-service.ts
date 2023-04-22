@@ -3,7 +3,7 @@ import PostInteractionRepository from '../dynamodb/repository/post-interaction-r
 
 const postInteractionRepository = new PostInteractionRepository();
 
-export const getPostInteraction = async (postId: string, userId: string) => {
+export const getInteraction = async (postId: string, userId: string) => {
   return await postInteractionRepository.getInteractionById(postId, userId);
 };
 
@@ -14,15 +14,17 @@ export const upsertInteraction = async (request: PostInteractionUpsertRequest) =
     existingInteraction.state === PostInteractionState.CLAIMED &&
     request.state === PostInteractionState.CONFIRMED
   ) {
-    return await postInteractionRepository.upsertInteraction(request);
+    return await postInteractionRepository.updateInteraction(request);
   }
 
   if (!existingInteraction && request.state === PostInteractionState.CLAIMED) {
-    return await postInteractionRepository.upsertInteraction(request);
+    return await postInteractionRepository.createInteraction(request);
   }
+
+  throw new Error('Unable to upsert interaction');
 };
 
 export default {
-  getPostInteraction,
+  getInteraction,
   upsertInteraction,
 };

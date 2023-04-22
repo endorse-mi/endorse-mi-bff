@@ -1,8 +1,16 @@
+import { ADMIN_USER_ID } from '../../../config';
 import { PostInteractionUpsertRequest } from '../../../dynamodb/model/post-interaction-model';
 import postInteractionService from '../../../service/post-interaction-service';
 
-export const upsertInteraction = async (parent, { request }: { request: PostInteractionUpsertRequest }) => {
+export const upsertPostInteraction = async (parent, { request }: { request: PostInteractionUpsertRequest }, context) => {
   console.log(`Upserting interaction for post ${request.postId} and user ${request.userId}`);
+  if (context.userId !== ADMIN_USER_ID) {
+    return {
+      message: `The user ${context.userId as string} is not authenticated to access this resource`,
+      success: false,
+    };
+  }
+
   try {
     await postInteractionService.upsertInteraction(request);
     return {

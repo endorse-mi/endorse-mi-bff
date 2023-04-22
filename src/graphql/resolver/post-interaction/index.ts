@@ -1,4 +1,4 @@
-import { upsertInteraction } from './mutation';
+import { upsertPostInteraction } from './mutation';
 import { postInteraction } from './query';
 
 export const postInteractionResolvers = {
@@ -6,6 +6,6 @@ export const postInteractionResolvers = {
     postInteraction,
   },
   Mutation: {
-    upsertInteraction,
+    upsertPostInteraction,
   },
 };

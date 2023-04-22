@@ -16,8 +16,8 @@ const server = new ApolloServer({
 export const handler = startServerAndCreateLambdaHandler(server, handlers.createAPIGatewayProxyEventRequestHandler(), {
   middleware: [
     async (event) => {
-      console.log('event:', event);
-      console.log('claims:', event.requestContext.authorizer?.claims);
+      // console.log('event:', event);
+      // console.log('claims:', event.requestContext.authorizer?.claims);
       // claims: {
       //   sub: 'd5ea9b25-8bf4-4fb5-ac26-1adaff36a363',
       //   email_verified: 'true',

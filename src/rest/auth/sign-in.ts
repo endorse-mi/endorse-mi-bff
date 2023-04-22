@@ -1,4 +1,4 @@
-import { signIn } from '../../service/auth';
+import { signIn } from '../../service/cognito-service';
 import { commonResponseFor } from '../utils/common';
 
 export interface SignInRequest {

@@ -1,4 +1,4 @@
-import { forgotPasswordSubmit } from '../../service/auth';
+import { forgotPasswordSubmit } from '../../service/cognito-service';
 import { commonResponseFor } from '../utils/common';
 
 export interface ForgotPasswordSubmitRequest {

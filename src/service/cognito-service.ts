@@ -1,3 +1,4 @@
+import { AdminDeleteUserCommand, CognitoIdentityProviderClient } from '@aws-sdk/client-cognito-identity-provider';
 import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { Amplify, Auth } from 'aws-amplify';
 import { ConfirmSignUpRequest } from '../rest/auth/confirm-sign-up';
@@ -7,8 +8,9 @@ import { SignInRequest } from '../rest/auth/sign-in';
 import { SignUpRequest } from '../rest/auth/sign-up';
 import { createUser } from './user-service';
 
+const UserPoolId = 'us-east-1_KIHMSNLAY';
 const poolData = {
-  UserPoolId: 'us-east-1_KIHMSNLAY',
+  UserPoolId,
   ClientId: '6s0jgosqonq2k57gm6pftsv2td',
 };
 
@@ -19,6 +21,10 @@ Amplify.configure({
     userPoolId: poolData.UserPoolId,
     userPoolWebClientId: poolData.ClientId,
   },
+});
+
+const cognitoClient = new CognitoIdentityProviderClient({
+  region: 'us-east-1',
 });
 
 export const signIn = async ({ username, password }: SignInRequest): Promise<CognitoUser> => {
@@ -52,4 +58,21 @@ export const forgotPassword = async ({ username }: ForgotPasswordRequest) => {
 export const forgotPasswordSubmit = async ({ username, password, code }: ForgotPasswordSubmitRequest) => {
   await Auth.forgotPasswordSubmit(username, code, password);
   console.log('reset password');
+};
+
+export const deleteUser = async (userId: string) => {
+  const command = new AdminDeleteUserCommand({
+    UserPoolId,
+    Username: userId,
+  });
+  return await cognitoClient.send(command);
+};
+
+export default {
+  signIn,
+  signUp,
+  confirmSignUp,
+  forgotPassword,
+  forgotPasswordSubmit,
+  deleteUser,
 };

@@ -1,4 +1,4 @@
-import { getPostById } from '../../../service/post-service';
+import { getPostById, getPostsByUserId } from '../../../service/post-service';
 
 export const post = async (parent: any, { id }: { id: string }) => {
   console.log('Getting post:', id);
@@ -6,7 +6,7 @@ export const post = async (parent: any, { id }: { id: string }) => {
   return post;
 };
 
-// export const postsByUserId = async (parent: any, request: PostsByIdRequest) => {
-//   console.log('getting posts by user id');
-//   await getPostsByUserId(request.userId);
-// };
+export const postsByUserId = async (parent: any, { userId }: { userId: string }) => {
+  console.log('getting posts by user id');
+  return await getPostsByUserId(userId);
+};

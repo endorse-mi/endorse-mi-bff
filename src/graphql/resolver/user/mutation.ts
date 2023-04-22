@@ -1,7 +1,15 @@
+import { ADMIN_USER_ID } from '../../../config';
 import { UserCreateRequest, UserUpdateRequest } from '../../../dynamodb/model/user-model';
 import userService from '../../../service/user-service';
 
-export const createUser = async (parent, { request }: { request: UserCreateRequest }) => {
+export const createUser = async (parent, { request }: { request: UserCreateRequest }, context) => {
+  if (context.userId !== ADMIN_USER_ID) {
+    return {
+      message: `The user ${context.userId as string} is not authenticated to access this resource`,
+      success: false,
+    };
+  }
+
   try {
     const user = await userService.createUser(request);
     return {
@@ -18,7 +26,13 @@ export const createUser = async (parent, { request }: { request: UserCreateReque
 };
 
 export const updateUser = async (parent, { request }: { request: UserUpdateRequest }, context) => {
-  console.log('context:', context);
+  if (context.userId !== request.userId) {
+    return {
+      message: `The user ${context.userId as string} is not authenticated to access this resource`,
+      success: false,
+    };
+  }
+
   try {
     const user = await userService.updateUser(request);
     return {
@@ -34,7 +48,14 @@ export const updateUser = async (parent, { request }: { request: UserUpdateReque
   }
 };
 
-export const deleteUser = async (parent, { id }: { id: string }) => {
+export const deleteUser = async (parent, { id }: { id: string }, context) => {
+  if (context.userId !== id) {
+    return {
+      message: `The user ${context.userId as string} is not authenticated to access this resource`,
+      success: false,
+    };
+  }
+
   try {
     await userService.deleteUser(id);
     return {

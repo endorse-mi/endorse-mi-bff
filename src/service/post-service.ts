@@ -7,6 +7,10 @@ export const getPostById = async (id: string) => {
   return await postRepository.getPostById(id);
 };
 
+export const getPostsByUserId = async (userId: string) => {
+  return await postRepository.getPostsByUserId(userId);
+};
+
 export const createPost = async (request: PostCreateRequest) => {
   return await postRepository.createPost(request);
 };

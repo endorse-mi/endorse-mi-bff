@@ -1,5 +1,5 @@
 export const postInteractionMutationSchema = `#graphql
     type Mutation {
-        upsertInteraction(request: UpsertPostInteractionRequest): UpsertPostInteractionResponse
+        upsertPostInteraction(request: UpsertPostInteractionRequest): UpsertPostInteractionResponse
     }
 `;

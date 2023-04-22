@@ -18,7 +18,11 @@ export default class PostInteractionRepository {
     return await this.postInteractionEntity.get({ postId, userId });
   };
 
-  upsertInteraction = async (request: PostInteractionUpsertRequest) => {
+  createInteraction = async (request: PostInteractionUpsertRequest) => {
     return await this.postInteractionEntity.create(request);
+  };
+
+  updateInteraction = async (request: PostInteractionUpsertRequest) => {
+    return await this.postInteractionEntity.update(request);
   };
 }
