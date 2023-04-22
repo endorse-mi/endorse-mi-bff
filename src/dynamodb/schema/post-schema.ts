@@ -20,8 +20,18 @@ export const PostSchema = new Schema(
       required: true,
       enum: ['ENDORSE', 'RECOMMEND'],
     },
-    skill: {
+    content: {
       type: String,
+      required: true,
+      validate: (content: string) => {
+        if (!content) {
+          throw new Error('Content cannot be empty');
+        }
+        if (content.length > 15) {
+          throw new Error('Content can only contain at most 15 characters');
+        }
+        return true;
+      },
     },
   },
   {

@@ -4,7 +4,7 @@ export class PostModel extends Item {
   postId = '';
   userId = '';
   type = '';
-  skill = '';
+  content = '';
   quota = 0;
 }
 
@@ -16,7 +16,7 @@ export enum PostType {
 export type PostCreateRequest = {
   userId: string;
   type: PostType;
-  skill?: string;
+  content?: string;
 };
 
 export type PostDeleteRequest = {

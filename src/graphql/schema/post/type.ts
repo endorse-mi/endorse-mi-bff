@@ -7,13 +7,13 @@ export const postTypeSchema = `#graphql
     type Post {
         userId: String!
         type: PostType!
-        skill: String
+        content: String
     }
 
     input CreatePostRequest {
         userId: String!
         type: PostType!
-        skill: String
+        content: String
     }
 
     type CreatePostResponse implements BaseResponse {
