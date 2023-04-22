@@ -26,7 +26,8 @@ export class GraphqlFunction {
     );
 
     foundation.graphqlResource.addMethod('POST', new LambdaIntegration(graphqlFunction), {
-      authorizationType: AuthorizationType.NONE,
+      authorizationType: AuthorizationType.COGNITO,
+      authorizer: { authorizerId: foundation.cognitoAuthorizer.ref },
     });
   }
 }
