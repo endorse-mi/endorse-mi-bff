@@ -1,39 +1,35 @@
 import { v4 as uuidv4 } from 'uuid';
 import { PostCreateRequest, PostType } from '../dynamodb/model/post-model';
 import PostRepository from '../dynamodb/repository/post-repository';
-import balanceService, { COST_PER_ENDORSEMENT_POST, COST_PER_RECOMMENDATION_POST } from './balance-service';
+import BalanceService from './balance-service';
 
-const ENDORSEMENT_QUOTA = 3;
-const RECOMMENDATION_QUOTA = 1;
+const ENDORSEMENT_POST_QUOTA = 3;
+const RECOMMENDATION_POST_QUOTA = 1;
 
-const postRepository = new PostRepository();
+export default class PostService {
+  private readonly postRepository = new PostRepository();
+  private readonly balanceService = new BalanceService();
 
-export const getPostById = async (id: string) => {
-  return await postRepository.getPostById(id);
-};
+  getPostById = async (id: string) => {
+    return await this.postRepository.getPostById(id);
+  };
 
-export const getPostsByUserId = async (userId: string) => {
-  return await postRepository.getPostsByUserId(userId);
-};
+  getPostsByUserId = async (userId: string) => {
+    return await this.postRepository.getPostsByUserId(userId);
+  };
 
-export const createPost = async (request: PostCreateRequest) => {
-  const postCost = request.type === PostType.ENDORSE ? COST_PER_ENDORSEMENT_POST : COST_PER_RECOMMENDATION_POST;
-  await balanceService.changeUserBalance(request.userId, postCost);
-  const post = toPost(request);
-  return await postRepository.createPost(post);
-};
+  createPost = async (request: PostCreateRequest) => {
+    await this.balanceService.purchasePost(request.userId, request.type);
+    const post = this.toPost(request);
+    return await this.postRepository.createPost(post);
+  };
 
-export const deletePost = async (id: string) => {
-  await postRepository.deletePost(id);
-};
+  deletePost = async (id: string) => {
+    await this.postRepository.deletePost(id);
+  };
 
-const toPost = (request: PostCreateRequest) => {
-  const quota = request.type === PostType.ENDORSE ? ENDORSEMENT_QUOTA : RECOMMENDATION_QUOTA;
-  return { ...request, postId: uuidv4(), maxQuota: quota, remainingQuota: quota };
-};
-
-export default {
-  getPostById,
-  createPost,
-  deletePost,
-};
+  private readonly toPost = (request: PostCreateRequest) => {
+    const quota = request.type === PostType.ENDORSE ? ENDORSEMENT_POST_QUOTA : RECOMMENDATION_POST_QUOTA;
+    return { ...request, postId: uuidv4(), maxQuota: quota, remainingQuota: quota };
+  };
+}
