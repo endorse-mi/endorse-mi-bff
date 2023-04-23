@@ -43,6 +43,10 @@ export const PostSchema = new Schema(
       required: true,
       validate: (quota: number) => quota >= 0,
     },
+    TTL: {
+      type: Number,
+      required: true,
+    },
   },
   {
     timestamps: {

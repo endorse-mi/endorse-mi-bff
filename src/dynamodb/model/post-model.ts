@@ -7,6 +7,7 @@ export type Post = {
   content?: string;
   maxQuota: number;
   remainingQuota: number;
+  TTL: number;
 };
 
 export class PostModel extends Item {
@@ -16,6 +17,7 @@ export class PostModel extends Item {
   content = '';
   maxQuota = 0;
   remainingQuota = 0;
+  TTL = 0;
 }
 
 export enum PostType {
