@@ -36,6 +36,10 @@ class PostRepository {
   setRemainingQuota = async (id: string, quota: number) => {
     await this.postEntity.update({ postId: id, remainingQuota: quota });
   };
+
+  setNConfirmed = async (id: string, nConfirmed: number) => {
+    await this.postEntity.update({ postId: id, nConfirmed });
+  };
 }
 
 export default new PostRepository();

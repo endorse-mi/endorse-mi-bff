@@ -4,9 +4,10 @@ export type Post = {
   postId: string;
   userId: string;
   type: PostType;
-  content?: string;
+  content: string;
   maxQuota: number;
   remainingQuota: number;
+  nConfirmed: number;
   TTL: number;
 };
 
@@ -17,6 +18,7 @@ export class PostModel extends Item {
   content = '';
   maxQuota = 0;
   remainingQuota = 0;
+  nConfirmed = 0;
   TTL = 0;
 }
 
@@ -28,7 +30,7 @@ export enum PostType {
 export type PostCreateRequest = {
   userId: string;
   type: PostType;
-  content?: string;
+  content: string;
 };
 
 export type PostDeleteRequest = {

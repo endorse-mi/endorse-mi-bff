@@ -35,7 +35,14 @@ class PostService {
 
   private readonly toPost = (request: PostCreateRequest) => {
     const quota = request.type === PostType.ENDORSE ? ENDORSEMENT_POST_QUOTA : RECOMMENDATION_POST_QUOTA;
-    return { ...request, postId: uuidv4(), maxQuota: quota, remainingQuota: quota, TTL: dayjs().add(3, 'day').toDate().getTime() / 1000 };
+    return {
+      ...request,
+      postId: uuidv4(),
+      maxQuota: quota,
+      remainingQuota: quota,
+      nConfirmed: 0,
+      TTL: dayjs().add(3, 'day').toDate().getTime() / 1000,
+    };
   };
 }
 

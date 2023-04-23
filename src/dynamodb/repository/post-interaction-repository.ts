@@ -24,6 +24,12 @@ class PostInteractionRepository {
   updateInteraction = async (request: PostInteraction) => {
     return await this.postInteractionEntity.update(request);
   };
+
+  deleteInteractionsByPostId = async (postId: string) => {
+    const interactions = await this.postInteractionEntity.query('postId').eq(postId).exec();
+    const interactionKeys = interactions.map((interaction) => ({ postId: interaction.postId, userId: interaction.userId }));
+    await this.postInteractionEntity.batchDelete(interactionKeys);
+  };
 }
 
 export default new PostInteractionRepository();

@@ -60,7 +60,7 @@ export const claimPostInteraction = async (parent, { postId }: { postId: string 
 };
 
 export const confirmPostInteraction = async (parent, { postId, userId }: { postId: string; userId: string }, context) => {
-  console.log(`Claiming post ${postId} interaction by user ${userId}`);
+  console.log(`Confirming post ${postId} interaction by user ${userId}`);
 
   const post = await postService.getPostById(postId);
   if (!post) {
@@ -92,7 +92,7 @@ export const confirmPostInteraction = async (parent, { postId, userId }: { postI
 };
 
 export const rejectPostInteraction = async (parent, { postId, userId }: { postId: string; userId: string }, context) => {
-  console.log(`Claiming post ${postId} interaction by user ${userId}`);
+  console.log(`Rejecting post ${postId} interaction by user ${userId}`);
 
   const post = await postService.getPostById(postId);
   if (!post) {
