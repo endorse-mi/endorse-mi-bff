@@ -8,9 +8,10 @@ type FunctionProps = {
   name: string;
   description: string;
   entry: string;
+  memorySize?: number;
 };
 
-export const functionPropsFor = ({ name, description, entry }: FunctionProps): NodejsFunctionProps => {
+export const functionPropsFor = ({ name, description, entry, memorySize = 512 }: FunctionProps): NodejsFunctionProps => {
   const projectRoot = path.join(__dirname, '../../../');
 
   return {
@@ -21,7 +22,7 @@ export const functionPropsFor = ({ name, description, entry }: FunctionProps): N
     handler: 'handler',
     depsLockFilePath: path.join(projectRoot, 'package.json'),
     timeout: Duration.seconds(30),
-    memorySize: 128,
+    memorySize,
     runtime: Runtime.NODEJS_18_X,
     tracing: Tracing.ACTIVE,
     logRetention: RetentionDays.ONE_MONTH,
