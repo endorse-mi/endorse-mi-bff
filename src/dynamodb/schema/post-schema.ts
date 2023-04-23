@@ -27,8 +27,8 @@ export const PostSchema = new Schema(
         if (!content) {
           throw new Error('Content cannot be empty');
         }
-        if (content.length > 15) {
-          throw new Error('Content can only contain at most 15 characters');
+        if (content.length > 20) {
+          throw new Error('Content can only contain at most 20 characters');
         }
         return true;
       },

@@ -26,13 +26,21 @@ export const upsertPostInteraction = async (parent, { request }: { request: Post
   }
 };
 
-export const claimPostInteraction = async (parent, { postId, userId }: { postId: string; userId: string }, context) => {
+export const claimPostInteraction = async (parent, { postId }: { postId: string }, context) => {
+  const userId: string = context.userId;
   console.log(`Claiming post ${postId} interaction by user ${userId}`);
 
   const post = await postService.getPostById(postId);
-  if (context.userId === post.userId) {
+  if (!post) {
     return {
-      message: `The user ${context.userId as string} is not authenticated to access this resource`,
+      message: `The post ${postId} doesn't exist`,
+      success: false,
+    };
+  }
+
+  if (userId === post.userId) {
+    return {
+      message: `The user ${userId} is not authenticated to access this resource`,
       success: false,
     };
   }
@@ -55,9 +63,16 @@ export const confirmPostInteraction = async (parent, { postId, userId }: { postI
   console.log(`Claiming post ${postId} interaction by user ${userId}`);
 
   const post = await postService.getPostById(postId);
+  if (!post) {
+    return {
+      message: `The post ${postId} doesn't exist`,
+      success: false,
+    };
+  }
+
   if (context.userId !== post.userId) {
     return {
-      message: `The user ${context.userId as string} is not authenticated to access this resource`,
+      message: `The user ${userId} is not authenticated to access this resource`,
       success: false,
     };
   }
@@ -80,9 +95,16 @@ export const rejectPostInteraction = async (parent, { postId, userId }: { postId
   console.log(`Claiming post ${postId} interaction by user ${userId}`);
 
   const post = await postService.getPostById(postId);
+  if (!post) {
+    return {
+      message: `The post ${postId} doesn't exist`,
+      success: false,
+    };
+  }
+
   if (context.userId !== post.userId) {
     return {
-      message: `The user ${context.userId as string} is not authenticated to access this resource`,
+      message: `The user ${userId} is not authenticated to access this resource`,
       success: false,
     };
   }

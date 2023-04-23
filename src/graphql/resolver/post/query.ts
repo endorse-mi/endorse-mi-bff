@@ -8,12 +8,12 @@ export const posts = async (parent: any, { startKey }: { startKey?: string }) =>
 };
 
 export const post = async (parent: any, { id }: { id: string }) => {
-  console.log('Getting post:', id);
+  logger.info({ postId: id }, 'Getting post');
   const post = await postService.getPostById(id);
   return post;
 };
 
 export const postsByUserId = async (parent: any, { userId }: { userId: string }) => {
-  console.log('getting posts by user id');
+  logger.info({ userId }, 'getting posts');
   return await postService.getPostsByUserId(userId);
 };

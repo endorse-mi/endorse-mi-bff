@@ -8,7 +8,7 @@ export const postTypeSchema = `#graphql
         postId: String!
         userId: String!
         type: PostType!
-        content: String
+        content: String!
         maxQuota: Int!
         remainingQuota: Int!
     }
@@ -22,13 +22,13 @@ export const postTypeSchema = `#graphql
     input PostCreateRequest {
         userId: String!
         type: PostType!
-        content: String
+        content: String!
     }
 
     type PostCreateResponse implements BaseResponse {
         success: Boolean!
         message: String!
-        post: Post
+        post: Post!
     }
 
     type PostDeleteResponse implements BaseResponse {

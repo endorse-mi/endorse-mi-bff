@@ -18,6 +18,8 @@ export const PostInteractionSchema = new Schema(
     },
     state: {
       type: String,
+      required: true,
+      enum: ['CLAIMED', 'CONFIRMED', 'REJECTED'],
     },
   },
   {

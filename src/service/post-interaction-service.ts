@@ -29,7 +29,7 @@ class PostInteractionService {
   claimInteraction = async (postId: string, userId: string) => {
     const existingInteraction = await postInteractionRepository.getInteractionById(postId, userId);
     if (existingInteraction) {
-      return new Error(`The user ${userId} has already claimed`);
+      throw new Error(`The user ${userId} has already claimed`);
     }
 
     const post = await postRepository.getPostById(postId);
@@ -40,7 +40,7 @@ class PostInteractionService {
   confirmInteraction = async (postId: string, userId: string) => {
     const existingInteraction = await postInteractionRepository.getInteractionById(postId, userId);
     if ((existingInteraction && existingInteraction.state !== PostInteractionState.CLAIMED) || !existingInteraction) {
-      return new Error(`The user ${userId} can't be confirmed`);
+      throw new Error(`The user ${userId} can't be confirmed`);
     }
 
     const post = await postRepository.getPostById(postId);
@@ -51,7 +51,7 @@ class PostInteractionService {
   rejectInteraction = async (postId: string, userId: string) => {
     const existingInteraction = await postInteractionRepository.getInteractionById(postId, userId);
     if ((existingInteraction && existingInteraction.state !== PostInteractionState.CLAIMED) || !existingInteraction) {
-      return new Error(`The user ${userId} can't be rejected`);
+      throw new Error(`The user ${userId} can't be rejected`);
     }
 
     const post = await postRepository.getPostById(postId);

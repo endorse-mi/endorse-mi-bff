@@ -14,7 +14,6 @@ class PostInteractionRepository {
   }
 
   getInteractionById = async (postId: string, userId: string) => {
-    console.log(postId, userId);
     return await this.postInteractionEntity.get({ postId, userId });
   };
 

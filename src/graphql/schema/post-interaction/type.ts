@@ -2,6 +2,7 @@ export const postInteractionTypeSchema = `#graphql
     enum InteractionState {
         CLAIMED
         CONFIRMED
+        REJECTED
     }
 
     type PostInteraction {
