@@ -9,7 +9,7 @@ export default function addSignUpEndpoint(scope: Construct, foundation: Foundati
   const lambda = new NodejsFunction(
     scope,
     'endorse-mi-bff-sign-up',
-    functionPropsFor({ name: 'endorse-mi-bff-sign-up', description: 'Sign up', entry: 'rest/auth/sign-up.ts' })
+    functionPropsFor({ name: 'endorse-mi-bff-sign-up-prod', description: 'Sign up', entry: 'rest/auth/sign-up.ts' })
   );
 
   const requestModel = foundation.api.addModel('sign-up-request', {

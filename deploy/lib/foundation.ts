@@ -24,7 +24,7 @@ export class Foundation {
     this.userPoolArn = StringParameter.valueForStringParameter(scope, '/prod/infrastructure/user/cognito-user-pool-arn');
 
     this.api = new RestApi(scope, 'rest-api', {
-      restApiName: 'endorse-mi-api-prod',
+      restApiName: 'endorse-mi-bff-prod',
       defaultCorsPreflightOptions: {
         allowOrigins: Cors.ALL_ORIGINS,
         allowMethods: Cors.ALL_METHODS,

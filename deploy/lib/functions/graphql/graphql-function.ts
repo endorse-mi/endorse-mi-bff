@@ -10,7 +10,7 @@ export class GraphqlFunction {
     const graphqlFunction = new NodejsFunction(
       scope,
       'graphql-function',
-      functionPropsFor({ name: 'endorse-mi-bff-graphql-function-prod', description: '', entry: 'graphql/index.ts' })
+      functionPropsFor({ name: 'endorse-mi-bff-graphql-prod', description: '', entry: 'graphql/index.ts' })
     );
 
     graphqlFunction.addToRolePolicy(

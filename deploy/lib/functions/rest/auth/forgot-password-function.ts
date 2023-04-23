@@ -9,7 +9,7 @@ export default function addForgotPasswordEndpoint(scope: Construct, foundation: 
     scope,
     'endorse-mi-bff-forgot-password',
     functionPropsFor({
-      name: 'endorse-mi-bff-forgot-password',
+      name: 'endorse-mi-bff-forgot-password-prod',
       description: 'Send a forgot password email to the user',
       entry: 'rest/auth/forgot-password.ts',
     })

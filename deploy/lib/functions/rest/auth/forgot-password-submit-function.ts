@@ -9,7 +9,7 @@ export default function addForgotPasswordSubmitEndpoint(scope: Construct, founda
     scope,
     'endorse-mi-bff-forgot-password-submit',
     functionPropsFor({
-      name: 'endorse-mi-bff-forgot-password-submit',
+      name: 'endorse-mi-bff-forgot-password-submit-prod',
       description: 'Submit a new password',
       entry: 'rest/auth/forgot-password-submit.ts',
     })

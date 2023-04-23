@@ -12,7 +12,7 @@ export class Waf {
     // }
     const rules = [
       rateLimitRuleFor({
-        name: 'endorse-mi-bff-global',
+        name: 'endorse-mi-bff-prod',
         priority: 1,
         limit: 100,
       }),
@@ -25,7 +25,7 @@ export class Waf {
         allow: {},
       },
       visibilityConfig: {
-        metricName: `endorse-mi-waf-acl-prod`,
+        metricName: `endorse-mi-bff-waf-acl-prod`,
         cloudWatchMetricsEnabled: true,
         sampledRequestsEnabled: true,
       },

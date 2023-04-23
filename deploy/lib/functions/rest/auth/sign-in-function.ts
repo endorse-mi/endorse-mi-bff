@@ -8,7 +8,7 @@ export default function addSignInEndpoint(scope: Construct, foundation: Foundati
   const lambda = new NodejsFunction(
     scope,
     'endorse-mi-bff-sign-in',
-    functionPropsFor({ name: 'endorse-mi-bff-sign-in', description: 'Sign in', entry: 'rest/auth/sign-in.ts' })
+    functionPropsFor({ name: 'endorse-mi-bff-sign-in-prod', description: 'Sign in', entry: 'rest/auth/sign-in.ts' })
   );
 
   const requestModel = foundation.api.addModel('sign-in-request', {

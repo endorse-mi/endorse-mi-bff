@@ -9,7 +9,7 @@ export default function addConfirmSignInEndpoint(scope: Construct, foundation: F
     scope,
     'endorse-mi-bff-confirm-sign-up',
     functionPropsFor({
-      name: 'endorse-mi-bff-confirm-sign-up',
+      name: 'endorse-mi-bff-confirm-sign-up-prod',
       description: 'Confirm sign up by sending the verification code',
       entry: 'rest/auth/confirm-sign-up.ts',
     })

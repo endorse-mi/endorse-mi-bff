@@ -8,13 +8,13 @@ type RateLimitRuleProps = {
 };
 
 export const rateLimitRuleFor = ({ name, priority, limit, uriPath }: RateLimitRuleProps): CfnWebACL.RuleProperty => ({
-  name: `${name}-prod-rate-limit`,
+  name: `${name}-rate-limit`,
   priority,
   action: {
     block: {},
   },
   visibilityConfig: {
-    metricName: `${name}-prod-rate-limit`,
+    metricName: `${name}-rate-limit`,
     cloudWatchMetricsEnabled: true,
     sampledRequestsEnabled: true,
   },
