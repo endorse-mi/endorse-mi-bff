@@ -10,8 +10,19 @@ class PostRepository {
     this.postEntity = dynamoose.model<PostModel>('post-table-prod', PostSchema, { create: false, waitForActive: false });
   }
 
+  getPosts = async (startKey?: string, limit = 10) => {
+    if (startKey) {
+      return await this.postEntity.scan().startAt({ postId: startKey }).limit(limit).exec();
+    }
+    return await this.postEntity.scan().limit(limit).exec();
+  };
+
   getPostById = async (id: string) => {
     return await this.postEntity.get({ postId: id });
+  };
+
+  getPostsByUserId = async (id: string) => {
+    return await this.postEntity.query('userId').eq(id).exec();
   };
 
   createPost = async (request: Post) => {
@@ -24,10 +35,6 @@ class PostRepository {
 
   setRemainingQuota = async (id: string, quota: number) => {
     await this.postEntity.update({ postId: id, remainingQuota: quota });
-  };
-
-  getPostsByUserId = async (id: string) => {
-    return await this.postEntity.query('userId').eq(id).exec();
   };
 }
 

@@ -11,6 +11,10 @@ const ENDORSEMENT_POST_QUOTA = 3;
 const RECOMMENDATION_POST_QUOTA = 1;
 
 class PostService {
+  getPosts = async (startKey?: string) => {
+    return await postRepository.getPosts(startKey);
+  };
+
   getPostById = async (id: string) => {
     return await postRepository.getPostById(id);
   };

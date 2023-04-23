@@ -13,19 +13,25 @@ export const postTypeSchema = `#graphql
         remainingQuota: Int!
     }
 
-    input CreatePostRequest {
+    type PostsScanResponse implements BaseResponse {
+        success: Boolean!
+        message: String!
+        posts: [Post]!
+    }
+
+    input PostCreateRequest {
         userId: String!
         type: PostType!
         content: String
     }
 
-    type CreatePostResponse implements BaseResponse {
+    type PostCreateResponse implements BaseResponse {
         success: Boolean!
         message: String!
         post: Post
     }
 
-    type DeletePostResponse implements BaseResponse {
+    type PostDeleteResponse implements BaseResponse {
         success: Boolean!
         message: String!
     }

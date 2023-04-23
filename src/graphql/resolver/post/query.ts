@@ -1,4 +1,11 @@
 import postService from '../../../service/post-service';
+import logger from '../../../utils/logger';
+
+export const posts = async (parent: any, { startKey }: { startKey?: string }) => {
+  logger.info({ startKey }, 'Getting posts');
+  const posts = await postService.getPosts(startKey);
+  return posts;
+};
 
 export const post = async (parent: any, { id }: { id: string }) => {
   console.log('Getting post:', id);
