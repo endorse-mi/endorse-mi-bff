@@ -1,5 +1,7 @@
-import { confirmSignUp } from '../../service/cognito-service';
+import CognitoService from '../../service/cognito-service';
 import { commonResponseFor } from '../utils/common';
+
+const cognitoService = new CognitoService();
 
 export interface ConfirmSignUpRequest {
   username: string;
@@ -10,7 +12,7 @@ export const handler = async (request) => {
   const confirmSignUpRequest: ConfirmSignUpRequest = JSON.parse(request.body);
 
   try {
-    await confirmSignUp(confirmSignUpRequest);
+    await cognitoService.confirmSignUp(confirmSignUpRequest);
     return commonResponseFor({
       statusCode: 200,
       body: {

@@ -1,5 +1,7 @@
-import { forgotPassword } from '../../service/cognito-service';
+import CognitoService from '../../service/cognito-service';
 import { commonResponseFor } from '../utils/common';
+
+const cognitoService = new CognitoService();
 
 export interface ForgotPasswordRequest {
   username: string;
@@ -9,7 +11,7 @@ export const handler = async (request) => {
   const forgotPasswordRequest: ForgotPasswordRequest = JSON.parse(request.body);
 
   try {
-    await forgotPassword(forgotPasswordRequest);
+    await cognitoService.forgotPassword(forgotPasswordRequest);
     return commonResponseFor({
       statusCode: 200,
       body: {

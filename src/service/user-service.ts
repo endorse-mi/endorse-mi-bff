@@ -1,34 +1,29 @@
 import { UserCreateRequest, UserUpdateRequest } from '../dynamodb/model/user-model';
 import UserRepository from '../dynamodb/repository/user-repository';
-import cognitoService from './cognito-service';
+import CognitoService from './cognito-service';
 
-const userRepository = new UserRepository();
+export default class UserService {
+  private readonly userRepository = new UserRepository();
+  private readonly cognitoService = new CognitoService();
 
-export const getUserById = async (id: string) => {
-  return await userRepository.getUserById(id);
-};
+  getUserById = async (id: string) => {
+    return await this.userRepository.getUserById(id);
+  };
 
-export const getUserBalanceById = async (id: string) => {
-  return await userRepository.getUserBalanceById(id);
-};
+  getUserBalanceById = async (id: string) => {
+    return await this.userRepository.getUserBalanceById(id);
+  };
 
-export const createUser = async (request: UserCreateRequest) => {
-  return await userRepository.createUser(request);
-};
+  createUser = async (request: UserCreateRequest) => {
+    return await this.userRepository.createUser(request);
+  };
 
-export const updateUser = async (request: UserUpdateRequest) => {
-  return await userRepository.updateUser(request);
-};
+  updateUser = async (request: UserUpdateRequest) => {
+    return await this.userRepository.updateUser(request);
+  };
 
-export const deleteUser = async (id: string) => {
-  await cognitoService.deleteUser(id);
-  await userRepository.deleteUser(id);
-};
-
-export default {
-  getUserById,
-  getUserBalanceById,
-  createUser,
-  updateUser,
-  deleteUser,
-};
+  deleteUser = async (id: string) => {
+    await this.cognitoService.deleteUser(id);
+    await this.userRepository.deleteUser(id);
+  };
+}
