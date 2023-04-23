@@ -1,6 +1,4 @@
-import PostService from '../../../service/post-service';
-
-const postService = new PostService();
+import postService from '../../../service/post-service';
 
 export const post = async (parent: any, { id }: { id: string }) => {
   console.log('Getting post:', id);

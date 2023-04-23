@@ -5,9 +5,12 @@ export const postTypeSchema = `#graphql
     }
 
     type Post {
+        postId: String!
         userId: String!
         type: PostType!
         content: String
+        maxQuota: Int!
+        remainingQuota: Int!
     }
 
     input CreatePostRequest {

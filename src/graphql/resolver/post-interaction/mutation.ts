@@ -1,10 +1,7 @@
 import { ADMIN_USER_ID } from '../../../config';
 import { PostInteractionUpsertRequest } from '../../../dynamodb/model/post-interaction-model';
-import PostInteractionService from '../../../service/post-interaction-service';
-import PostService from '../../../service/post-service';
-
-const postService = new PostService();
-const postInteractionService = new PostInteractionService();
+import postInteractionService from '../../../service/post-interaction-service';
+import postService from '../../../service/post-service';
 
 export const upsertPostInteraction = async (parent, { request }: { request: PostInteractionUpsertRequest }, context) => {
   console.log(`Upserting interaction for post ${request.postId} and user ${request.userId}`);

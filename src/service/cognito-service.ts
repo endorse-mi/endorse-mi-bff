@@ -6,7 +6,7 @@ import { ForgotPasswordRequest } from '../rest/auth/forgot-password';
 import { ForgotPasswordSubmitRequest } from '../rest/auth/forgot-password-submit';
 import { SignInRequest } from '../rest/auth/sign-in';
 import { SignUpRequest } from '../rest/auth/sign-up';
-import UserService from './user-service';
+import userService from './user-service';
 
 const UserPoolId = 'us-east-1_KIHMSNLAY';
 const poolData = {
@@ -21,8 +21,7 @@ Amplify.configure({
   },
 });
 
-export default class CognitoService {
-  private readonly userService = new UserService();
+class CognitoService {
   private readonly cognitoClient = new CognitoIdentityProviderClient({
     region: 'us-east-1',
   });
@@ -39,7 +38,7 @@ export default class CognitoService {
       password,
     });
 
-    await this.userService.createUser({ userId: username, familyName, givenName, profile });
+    await userService.createUser({ userId: username, familyName, givenName, profile });
 
     console.log('signed up:', JSON.stringify(user, null, 2));
     return user;
@@ -68,3 +67,5 @@ export default class CognitoService {
     return await this.cognitoClient.send(command);
   };
 }
+
+export default new CognitoService();

@@ -4,7 +4,7 @@ import { INITIAL_BALANCE } from '../../service/balance-service';
 import { UserCreateRequest, UserModel, UserUpdateRequest } from '../model/user-model';
 import { UserSchema } from '../schema/user-schema';
 
-export default class UserRepository {
+class UserRepository {
   private readonly userEntity: Model<UserModel>;
 
   constructor() {
@@ -36,3 +36,5 @@ export default class UserRepository {
     return await this.userEntity.update({ userId }, { balance: newBalance });
   };
 }
+
+export default new UserRepository();

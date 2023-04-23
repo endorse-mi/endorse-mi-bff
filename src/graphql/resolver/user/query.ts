@@ -1,6 +1,4 @@
-import UserService from '../../../service/user-service';
-
-const userService = new UserService();
+import userService from '../../../service/user-service';
 
 export const user = async (parent: any, { id }: { id: string }) => {
   console.log(`Getting user by id ${id}`);

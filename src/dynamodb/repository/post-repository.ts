@@ -3,7 +3,7 @@ import { Model } from 'dynamoose/dist/Model';
 import { Post, PostModel } from '../model/post-model';
 import { PostSchema } from '../schema/post-schema';
 
-export default class PostRepository {
+class PostRepository {
   private readonly postEntity: Model<PostModel>;
 
   constructor() {
@@ -30,3 +30,5 @@ export default class PostRepository {
     return await this.postEntity.query('userId').eq(id).exec();
   };
 }
+
+export default new PostRepository();

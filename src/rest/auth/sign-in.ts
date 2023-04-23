@@ -1,7 +1,5 @@
-import CognitoService from '../../service/cognito-service';
+import cognitoService from '../../service/cognito-service';
 import { commonResponseFor } from '../utils/common';
-
-const cognitoService = new CognitoService();
 
 export interface SignInRequest {
   username: string;

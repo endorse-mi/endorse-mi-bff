@@ -1,31 +1,28 @@
 import { v4 as uuidv4 } from 'uuid';
 import { PostCreateRequest, PostType } from '../dynamodb/model/post-model';
-import PostRepository from '../dynamodb/repository/post-repository';
-import BalanceService from './balance-service';
+import postRepository from '../dynamodb/repository/post-repository';
+import balanceService from './balance-service';
 
 const ENDORSEMENT_POST_QUOTA = 3;
 const RECOMMENDATION_POST_QUOTA = 1;
 
-export default class PostService {
-  private readonly postRepository = new PostRepository();
-  private readonly balanceService = new BalanceService();
-
+class PostService {
   getPostById = async (id: string) => {
-    return await this.postRepository.getPostById(id);
+    return await postRepository.getPostById(id);
   };
 
   getPostsByUserId = async (userId: string) => {
-    return await this.postRepository.getPostsByUserId(userId);
+    return await postRepository.getPostsByUserId(userId);
   };
 
   createPost = async (request: PostCreateRequest) => {
-    await this.balanceService.purchasePost(request.userId, request.type);
+    await balanceService.purchasePost(request.userId, request.type);
     const post = this.toPost(request);
-    return await this.postRepository.createPost(post);
+    return await postRepository.createPost(post);
   };
 
   deletePost = async (id: string) => {
-    await this.postRepository.deletePost(id);
+    await postRepository.deletePost(id);
   };
 
   private readonly toPost = (request: PostCreateRequest) => {
@@ -33,3 +30,5 @@ export default class PostService {
     return { ...request, postId: uuidv4(), maxQuota: quota, remainingQuota: quota };
   };
 }
+
+export default new PostService();

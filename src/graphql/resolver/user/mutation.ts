@@ -1,8 +1,6 @@
 import { ADMIN_USER_ID } from '../../../config';
 import { UserCreateRequest, UserUpdateRequest } from '../../../dynamodb/model/user-model';
-import UserService from '../../../service/user-service';
-
-const userService = new UserService();
+import userService from '../../../service/user-service';
 
 export const createUser = async (parent, { request }: { request: UserCreateRequest }, context) => {
   if (context.userId !== ADMIN_USER_ID) {

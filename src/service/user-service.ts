@@ -1,29 +1,28 @@
 import { UserCreateRequest, UserUpdateRequest } from '../dynamodb/model/user-model';
-import UserRepository from '../dynamodb/repository/user-repository';
-import CognitoService from './cognito-service';
+import userRepository from '../dynamodb/repository/user-repository';
+import cognitoService from './cognito-service';
 
-export default class UserService {
-  private readonly userRepository = new UserRepository();
-  private readonly cognitoService = new CognitoService();
-
+class UserService {
   getUserById = async (id: string) => {
-    return await this.userRepository.getUserById(id);
+    return await userRepository.getUserById(id);
   };
 
   getUserBalanceById = async (id: string) => {
-    return await this.userRepository.getUserBalanceById(id);
+    return await userRepository.getUserBalanceById(id);
   };
 
   createUser = async (request: UserCreateRequest) => {
-    return await this.userRepository.createUser(request);
+    return await userRepository.createUser(request);
   };
 
   updateUser = async (request: UserUpdateRequest) => {
-    return await this.userRepository.updateUser(request);
+    return await userRepository.updateUser(request);
   };
 
   deleteUser = async (id: string) => {
-    await this.cognitoService.deleteUser(id);
-    await this.userRepository.deleteUser(id);
+    await cognitoService.deleteUser(id);
+    await userRepository.deleteUser(id);
   };
 }
+
+export default new UserService();

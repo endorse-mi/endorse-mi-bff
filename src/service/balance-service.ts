@@ -1,6 +1,6 @@
 import { PostType } from '../dynamodb/model/post-model';
-import UserRepository from '../dynamodb/repository/user-repository';
-import UserService from './user-service';
+import userRepository from '../dynamodb/repository/user-repository';
+import userService from './user-service';
 
 export const INITIAL_BALANCE = 100;
 export const ENDORSEMENT_POST_COST = -100;
@@ -8,18 +8,15 @@ export const RECOMMENDATION_POST_COST = -1000;
 export const ENDORSEMENT_POST_AWARD = 25;
 export const RECOMMENDATION_POST_AWARD = 500;
 
-export default class BalanceService {
-  private readonly userRepository = new UserRepository();
-  private readonly userService = new UserService();
-
+class BalanceService {
   changeUserBalance = async (userId: string, value: number) => {
-    const userBalance = await this.userService.getUserBalanceById(userId);
+    const userBalance = await userService.getUserBalanceById(userId);
     const newBalance = userBalance + value;
     if (newBalance < 0) {
       throw new Error(`User ${userId} doesn't have enough balance`);
     }
 
-    await this.userRepository.updateUserBalance(userId, newBalance);
+    await userRepository.updateUserBalance(userId, newBalance);
   };
 
   purchaseEndorsementPost = async (userId: string) => {
@@ -46,3 +43,5 @@ export default class BalanceService {
     type === PostType.ENDORSE ? await this.rewardEndorsementPost(userId) : await this.rewardRecommendationPost(userId);
   };
 }
+
+export default new BalanceService();

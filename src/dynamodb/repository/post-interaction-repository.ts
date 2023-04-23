@@ -3,7 +3,7 @@ import { Model } from 'dynamoose/dist/Model';
 import { PostInteraction, PostInteractionModel } from '../model/post-interaction-model';
 import { PostInteractionSchema } from '../schema/post-interaction-schema';
 
-export default class PostInteractionRepository {
+class PostInteractionRepository {
   private readonly postInteractionEntity: Model<PostInteractionModel>;
 
   constructor() {
@@ -26,3 +26,5 @@ export default class PostInteractionRepository {
     return await this.postInteractionEntity.update(request);
   };
 }
+
+export default new PostInteractionRepository();
