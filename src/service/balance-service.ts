@@ -32,4 +32,16 @@ export default class BalanceService {
   purchasePost = async (userId: string, type: PostType) => {
     type === PostType.ENDORSE ? await this.purchaseEndorsementPost(userId) : await this.purchaseRecommendationPost(userId);
   };
+
+  rewardEndorsementPost = async (userId: string) => {
+    await this.changeUserBalance(userId, ENDORSEMENT_POST_AWARD);
+  };
+
+  rewardRecommendationPost = async (userId: string) => {
+    await this.changeUserBalance(userId, RECOMMENDATION_POST_AWARD);
+  };
+
+  rewardPost = async (userId: string, type: PostType) => {
+    type === PostType.ENDORSE ? await this.rewardEndorsementPost(userId) : await this.rewardRecommendationPost(userId);
+  };
 }

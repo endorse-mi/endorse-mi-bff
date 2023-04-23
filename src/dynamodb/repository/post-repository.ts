@@ -22,6 +22,10 @@ export default class PostRepository {
     await this.postEntity.delete(id);
   };
 
+  setRemainingQuota = async (id: string, quota: number) => {
+    await this.postEntity.update({ postId: id, remainingQuota: quota });
+  };
+
   getPostsByUserId = async (id: string) => {
     return await this.postEntity.query('userId').eq(id).exec();
   };

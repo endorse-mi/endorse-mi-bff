@@ -1,6 +1,6 @@
 import * as dynamoose from 'dynamoose';
 import { Model } from 'dynamoose/dist/Model';
-import { PostInteractionModel, PostInteractionUpsertRequest } from '../model/post-interaction-model';
+import { PostInteraction, PostInteractionModel } from '../model/post-interaction-model';
 import { PostInteractionSchema } from '../schema/post-interaction-schema';
 
 export default class PostInteractionRepository {
@@ -18,11 +18,11 @@ export default class PostInteractionRepository {
     return await this.postInteractionEntity.get({ postId, userId });
   };
 
-  createInteraction = async (request: PostInteractionUpsertRequest) => {
+  createInteraction = async (request: PostInteraction) => {
     return await this.postInteractionEntity.create(request);
   };
 
-  updateInteraction = async (request: PostInteractionUpsertRequest) => {
+  updateInteraction = async (request: PostInteraction) => {
     return await this.postInteractionEntity.update(request);
   };
 }
