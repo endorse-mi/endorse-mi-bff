@@ -5,33 +5,33 @@ export const postTypeSchema = `#graphql
     }
 
     type Post {
-        postId: String!
-        userId: String!
+        postId: ID!
+        userId: ID!
         type: PostType!
         content: String!
         maxQuota: Int!
         remainingQuota: Int!
     }
 
-    type PostsScanResponse implements BaseResponse {
+    type PostsResponse implements BaseResponse {
+        posts: [Post]!
         success: Boolean!
         message: String!
-        posts: [Post]!
     }
 
     input PostCreateRequest {
-        userId: String!
+        userId: ID!
         type: PostType!
         content: String!
     }
 
-    type PostCreateResponse implements BaseResponse {
+    type PostResponse implements BaseResponse {
+        post: Post!
         success: Boolean!
         message: String!
-        post: Post!
     }
 
-    type PostDeleteResponse implements BaseResponse {
+    type PostBaseResponse implements BaseResponse {
         success: Boolean!
         message: String!
     }

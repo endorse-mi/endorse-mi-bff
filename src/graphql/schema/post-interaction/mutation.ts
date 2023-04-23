@@ -3,16 +3,16 @@ export const postInteractionMutationSchema = `#graphql
         """
         Call by users to claim they have fulfilled the request.
         """
-        claimPostInteraction(postId: String!): PostInteractionResponse
+        claimPostInteraction(postId: ID!): PostInteractionResponse
 
         """
         Call by the author of the post to confirm a user has fulfilled the request.
         """
-        confirmPostInteraction(postId: String!, userId: String!): PostInteractionResponse
-        
+        confirmPostInteraction(postId: ID!, userId: ID!): PostInteractionResponse
+
         """
         Call by the author of the post to reject a user's claim.
         """
-        rejectPostInteraction(postId: String!, userId: String!): PostInteractionResponse
+        rejectPostInteraction(postId: ID!, userId: ID!): PostInteractionResponse
     }
 `;

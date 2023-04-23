@@ -1,6 +1,6 @@
 export const userTypeSchema = `#graphql
     type User {
-        userId: String!
+        userId: ID!
         familyName: String!
         givenName: String!
         profile: String!
@@ -15,20 +15,20 @@ export const userTypeSchema = `#graphql
     }
 
     input UserCreateRequest {
-        userId: String!
+        userId: ID!
         familyName: String!
         givenName: String!
         profile: String!
     }
 
     input UserUpdateRequest {
-        userId: String!
+        userId: ID!
         familyName: String
         givenName: String
         profile: String
     }
 
-    type UserDeleteResponse implements BaseResponse {
+    type UserBaseResponse implements BaseResponse {
         success: Boolean!
         message: String!
     }
