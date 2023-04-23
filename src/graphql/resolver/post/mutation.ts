@@ -1,16 +1,11 @@
 import { PostCreateRequest } from '../../../dynamodb/model/post-model';
 import postService from '../../../service/post-service';
+import { requireSameUser } from '../../../utils/authorization';
 
 export const createPost = async (parent, { request }: { request: PostCreateRequest }, context) => {
   console.log(`Creating post for ${request.userId}`);
-  if (context.userId !== request.userId) {
-    return {
-      message: `The user ${context.userId as string} is not authenticated to access this resource`,
-      success: false,
-    };
-  }
-
   try {
+    requireSameUser(context.userId, request.userId);
     const post = await postService.createPost(request);
     return {
       post,
@@ -27,16 +22,9 @@ export const createPost = async (parent, { request }: { request: PostCreateReque
 
 export const deletePost = async (parent, { id }: { id: string }, context) => {
   console.log(`Deleting post ${id}`);
-
-  const post = await postService.getPostById(id);
-  if (context.userId !== post.userId) {
-    return {
-      message: `The user ${context.userId as string} is not authenticated to access this resource`,
-      success: false,
-    };
-  }
-
   try {
+    const post = await postService.getPostById(id);
+    requireSameUser(context.userId, post.userId);
     await postService.deletePost(id);
     return {
       message: `Deleted post ${id}`,

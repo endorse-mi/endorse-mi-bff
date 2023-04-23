@@ -1,7 +1,8 @@
 import userService from '../../../service/user-service';
+import logger from '../../../utils/logger';
 
 export const user = async (parent: any, { id }: { id: string }) => {
-  console.log(`Getting user by id ${id}`);
+  logger.info({ id }, 'Getting user by id');
   try {
     const { userId, familyName, givenName, profile, createdAt, updatedAt } = await userService.getUserById(id);
     return {

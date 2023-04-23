@@ -1,5 +1,6 @@
 import postInteractionService from '../../../service/post-interaction-service';
 import postService from '../../../service/post-service';
+import { requireDifferentUser, requireSameUser } from '../../../utils/authorization';
 
 export const claimPostInteraction = async (parent, { postId }: { postId: string }, context) => {
   const userId: string = context.userId;
@@ -13,14 +14,8 @@ export const claimPostInteraction = async (parent, { postId }: { postId: string 
     };
   }
 
-  if (userId === post.userId) {
-    return {
-      message: `The user ${userId} is not authenticated to access this resource`,
-      success: false,
-    };
-  }
-
   try {
+    requireDifferentUser(userId, post.userId);
     await postInteractionService.claimInteraction(postId, userId);
     return {
       message: `Interaction of post ${postId} has been claimed by ${userId}`,
@@ -45,14 +40,8 @@ export const confirmPostInteraction = async (parent, { postId, userId }: { postI
     };
   }
 
-  if (context.userId !== post.userId) {
-    return {
-      message: `The user ${userId} is not authenticated to access this resource`,
-      success: false,
-    };
-  }
-
   try {
+    requireSameUser(context.userId, post.userId);
     await postInteractionService.confirmInteraction(postId, userId);
     return {
       message: `Interaction of post ${postId} from ${userId} has been confirmed by ${post.userId}`,
@@ -77,14 +66,8 @@ export const rejectPostInteraction = async (parent, { postId, userId }: { postId
     };
   }
 
-  if (context.userId !== post.userId) {
-    return {
-      message: `The user ${userId} is not authenticated to access this resource`,
-      success: false,
-    };
-  }
-
   try {
+    requireSameUser(context.userId, post.userId);
     await postInteractionService.rejectInteraction(postId, userId);
     return {
       message: `Interaction of post ${postId} from ${userId} has been rejected`,
