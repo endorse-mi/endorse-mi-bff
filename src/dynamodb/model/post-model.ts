@@ -12,14 +12,14 @@ export type Post = {
 };
 
 export class PostModel extends Item {
-  postId = '';
-  userId = '';
-  type = '';
-  content = '';
-  maxQuota = 0;
-  remainingQuota = 0;
-  nConfirmed = 0;
-  TTL = 0;
+  postId: string;
+  userId: string;
+  type: string;
+  content: string;
+  maxQuota: number;
+  remainingQuota: number;
+  nConfirmed: number;
+  TTL: number;
 }
 
 export enum PostType {

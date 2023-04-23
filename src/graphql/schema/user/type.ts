@@ -8,7 +8,7 @@ export const userTypeSchema = `#graphql
         updatedAt: String!
     }
 
-    type UserGetResponse implements BaseResponse {
+    type UserResponse implements BaseResponse {
         user: User
         success: Boolean!
         message: String!
@@ -21,23 +21,11 @@ export const userTypeSchema = `#graphql
         profile: String!
     }
 
-    type UserCreateResponse implements BaseResponse {
-        user: User
-        success: Boolean!
-        message: String!
-    }
-
     input UserUpdateRequest {
         userId: String!
         familyName: String
         givenName: String
         profile: String
-    }
-
-    type UserUpdateResponse implements BaseResponse {
-        user: User
-        success: Boolean!
-        message: String!
     }
 
     type UserDeleteResponse implements BaseResponse {

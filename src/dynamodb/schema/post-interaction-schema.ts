@@ -16,7 +16,7 @@ export const PostInteractionSchema = new Schema(
       required: true,
       rangeKey: true,
     },
-    requesterId: {
+    authorId: {
       type: String,
       required: true,
     },

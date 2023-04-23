@@ -10,14 +10,9 @@ export const postInteractionTypeSchema = `#graphql
         userId: String!
         state: InteractionState!
     }
-
-    input PostInteractionUpsertRequest {
-        postId: String!
-        userId: String!
-        state: InteractionState!
-    }
-
-    type PostInteractionUpsertResponse implements BaseResponse {
+    
+    type PostInteractionResponse implements BaseResponse {
+        interaction: PostInteraction
         success: Boolean!
         message: String!
     }

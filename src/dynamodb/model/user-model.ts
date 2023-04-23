@@ -1,13 +1,13 @@
 import { Item } from 'dynamoose/dist/Item';
 
 export class UserModel extends Item {
-  userId = '';
-  familyName = '';
-  givenName = '';
-  profile = '';
-  balance = 0;
-  createdAt = '';
-  updatedAt = '';
+  userId: string;
+  familyName: string;
+  givenName: string;
+  profile: string;
+  balance: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type UserCreateRequest = {

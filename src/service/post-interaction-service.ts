@@ -1,4 +1,4 @@
-import { PostInteractionState, PostInteractionUpsertRequest } from '../dynamodb/model/post-interaction-model';
+import { PostInteractionState } from '../dynamodb/model/post-interaction-model';
 import { PostType } from '../dynamodb/model/post-model';
 import postInteractionRepository from '../dynamodb/repository/post-interaction-repository';
 import postRepository from '../dynamodb/repository/post-repository';
@@ -9,24 +9,6 @@ class PostInteractionService {
     return await postInteractionRepository.getInteractionById(postId, userId);
   };
 
-  upsertInteraction = async (request: PostInteractionUpsertRequest) => {
-    const existingInteraction = await postInteractionRepository.getInteractionById(request.postId, request.userId);
-    const post = await postRepository.getPostById(request.postId);
-    if (
-      existingInteraction &&
-      existingInteraction.state === PostInteractionState.CLAIMED &&
-      request.state === PostInteractionState.CONFIRMED
-    ) {
-      return await postInteractionRepository.updateInteraction({ ...request, requesterId: post.userId });
-    }
-
-    if (!existingInteraction && request.state === PostInteractionState.CLAIMED) {
-      return await postInteractionRepository.createInteraction({ ...request, requesterId: post.userId });
-    }
-
-    throw new Error('Unable to upsert interaction');
-  };
-
   claimInteraction = async (postId: string, userId: string) => {
     const existingInteraction = await postInteractionRepository.getInteractionById(postId, userId);
     if (existingInteraction) {
@@ -35,7 +17,7 @@ class PostInteractionService {
 
     const post = await postRepository.getPostById(postId);
     await postRepository.setRemainingQuota(postId, post.remainingQuota - 1);
-    await postInteractionRepository.createInteraction({ postId, userId, requesterId: post.userId, state: PostInteractionState.CLAIMED });
+    await postInteractionRepository.createInteraction({ postId, userId, authorId: post.userId, state: PostInteractionState.CLAIMED });
   };
 
   confirmInteraction = async (postId: string, userId: string) => {
@@ -48,7 +30,7 @@ class PostInteractionService {
     const nConfirmed = post.nConfirmed + 1;
     await postRepository.setNConfirmed(postId, nConfirmed);
     await balanceService.rewardPost(userId, post.type as PostType);
-    await postInteractionRepository.updateInteraction({ postId, userId, requesterId: post.userId, state: PostInteractionState.CONFIRMED });
+    await postInteractionRepository.updateInteraction({ postId, userId, authorId: post.userId, state: PostInteractionState.CONFIRMED });
 
     if (nConfirmed >= post.maxQuota) {
       await postRepository.deletePost(post.postId);
@@ -64,7 +46,7 @@ class PostInteractionService {
 
     const post = await postRepository.getPostById(postId);
     await postRepository.setRemainingQuota(postId, post.remainingQuota + 1);
-    await postInteractionRepository.updateInteraction({ postId, userId, requesterId: post.userId, state: PostInteractionState.REJECTED });
+    await postInteractionRepository.updateInteraction({ postId, userId, authorId: post.userId, state: PostInteractionState.REJECTED });
   };
 }
 
