@@ -3,12 +3,14 @@ import { Item } from 'dynamoose/dist/Item';
 export type PostInteraction = {
   postId: string;
   userId: string;
+  requesterId: string;
   state: PostInteractionState;
 };
 
 export class PostInteractionModel extends Item {
   postId = '';
   userId = '';
+  requesterId: string;
   state = '';
 }
 
