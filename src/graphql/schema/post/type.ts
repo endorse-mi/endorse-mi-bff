@@ -11,6 +11,7 @@ export const postTypeSchema = `#graphql
         content: String!
         maxQuota: Int!
         remainingQuota: Int!
+        author: User!
     }
 
     type PostsResponse implements BaseResponse {

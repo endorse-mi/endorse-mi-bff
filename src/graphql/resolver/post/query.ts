@@ -1,4 +1,5 @@
 import postService from '../../../service/post-service';
+import userService from '../../../service/user-service';
 import logger from '../../../utils/logger';
 
 export const posts = async (parent: any, { startKey }: { startKey?: string }) => {
@@ -14,6 +15,11 @@ export const post = async (parent: any, { id }: { id: string }) => {
 };
 
 export const postsByUserId = async (parent: any, { userId }: { userId: string }) => {
-  logger.info({ userId }, 'getting posts');
+  logger.info({ userId }, 'Getting posts');
   return await postService.getPostsByUserId(userId);
+};
+
+export const author = async (parent: any) => {
+  logger.info({ parent }, 'Getting author');
+  return userService.getUserById(parent.userId);
 };

@@ -1,5 +1,5 @@
 import { createPost, deletePost } from './mutation';
-import { post, posts, postsByUserId } from './query';
+import { author, post, posts, postsByUserId } from './query';
 
 export const postResolvers = {
   Query: {
@@ -10,5 +10,8 @@ export const postResolvers = {
   Mutation: {
     createPost,
     deletePost,
+  },
+  Post: {
+    author,
   },
 };
