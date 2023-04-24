@@ -14,22 +14,17 @@ export const userTypeSchema = `#graphql
         message: String!
     }
 
-    input UserCreateRequest {
+    input UserCreateInput {
         userId: ID!
         familyName: String!
         givenName: String!
         profile: String!
     }
 
-    input UserUpdateRequest {
+    input UserUpdateInput {
         userId: ID!
         familyName: String
         givenName: String
         profile: String
-    }
-
-    type UserBaseResponse implements BaseResponse {
-        success: Boolean!
-        message: String!
     }
 `;

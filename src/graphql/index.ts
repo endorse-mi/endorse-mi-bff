@@ -14,10 +14,8 @@ const server = new ApolloServer({
 // createAPIGatewayProxyEventRequestHandler expects an event in the format used by the original version (i.e. RestApi) of API Gateway.
 // createAPIGatewayProxyEventV2RequestHandler expects an event in the format used by the HttpApi version of Amazon API Gateway.
 export const handler = startServerAndCreateLambdaHandler(server, handlers.createAPIGatewayProxyEventRequestHandler(), {
-  middleware: [
-    async (event) => {
-      // console.log('event:', event);
-      // console.log('claims:', event.requestContext.authorizer?.claims);
+  context: async ({ event }) => {
+    return {
       // claims: {
       //   sub: 'd5ea9b25-8bf4-4fb5-ac26-1adaff36a363',
       //   email_verified: 'true',
@@ -33,10 +31,6 @@ export const handler = startServerAndCreateLambdaHandler(server, handlers.create
       //   jti: 'f435762c-8afa-4a72-b0d8-f91579badcd3',
       //   email: 'fongchinghinstephen@gmail.com'
       // }
-    },
-  ],
-  context: async ({ event }) => {
-    return {
       userId: event.requestContext.authorizer?.claims?.email,
     };
   },

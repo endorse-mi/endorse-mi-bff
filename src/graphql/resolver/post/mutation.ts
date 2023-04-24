@@ -24,9 +24,14 @@ export const deletePost = async (parent, { id }: { id: string }, context) => {
   console.log(`Deleting post ${id}`);
   try {
     const post = await postService.getPostById(id);
+    if (!post) {
+      throw new Error(`Post ${id} doesn't exist`);
+    }
+
     requireSameUser(context.userId, post.userId);
     await postService.deletePost(id);
     return {
+      post,
       message: `Deleted post ${id}`,
       success: true,
     };

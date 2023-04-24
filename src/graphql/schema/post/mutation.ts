@@ -1,6 +1,6 @@
 export const postMutationSchema = `#graphql
     type Mutation {
-        createPost(request: PostCreateRequest): PostResponse
-        deletePost(id: ID!): PostBaseResponse
+        createPost(request: PostCreateInput!): PostResponse
+        deletePost(id: ID!): PostResponse
     }
 `;

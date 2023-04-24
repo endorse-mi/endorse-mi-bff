@@ -20,19 +20,14 @@ export const postTypeSchema = `#graphql
         message: String!
     }
 
-    input PostCreateRequest {
+    input PostCreateInput {
         userId: ID!
         type: PostType!
         content: String!
     }
 
     type PostResponse implements BaseResponse {
-        post: Post!
-        success: Boolean!
-        message: String!
-    }
-
-    type PostBaseResponse implements BaseResponse {
+        post: Post
         success: Boolean!
         message: String!
     }

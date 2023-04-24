@@ -20,8 +20,13 @@ class UserService {
   };
 
   deleteUser = async (id: string) => {
+    const user = this.getUserById(id);
+    if (!user) {
+      throw new Error("User doesn't exist");
+    }
     await cognitoService.deleteUser(id);
     await userRepository.deleteUser(id);
+    return user;
   };
 }
 

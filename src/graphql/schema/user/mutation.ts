@@ -1,7 +1,7 @@
 export const userMutationSchema = `#graphql
     type Mutation {
-        createUser(request: UserCreateRequest): UserResponse
-        updateUser(request: UserUpdateRequest): UserResponse
-        deleteUser(id: ID!): UserBaseResponse
+        createUser(request: UserCreateInput!): UserResponse
+        updateUser(request: UserUpdateInput!): UserResponse
+        deleteUser(id: ID!): UserResponse
     }
 `;
