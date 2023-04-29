@@ -1,7 +1,7 @@
 export const postQuerySchema = `#graphql
     type Query {
-        post(id: String!): Post
+        post(id: ID!): Post
         posts(startKey: String): [Post]!
-        postsByUserId(userId: String!): [Post]!
+        postsByUserId(userId: ID!): [Post]!
     }
 `;

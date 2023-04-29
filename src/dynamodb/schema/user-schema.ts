@@ -29,6 +29,9 @@ export const UserSchema = new Schema(
         return true;
       },
     },
+    headline: {
+      type: String,
+    },
     balance: {
       type: Number,
       required: true,

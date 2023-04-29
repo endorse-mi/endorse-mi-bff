@@ -5,6 +5,7 @@ export class UserModel extends Item {
   familyName: string;
   givenName: string;
   profile: string;
+  headline: string;
   balance: number;
   createdAt: string;
   updatedAt: string;
@@ -22,4 +23,5 @@ export type UserUpdateRequest = {
   familyName?: string;
   givenName?: string;
   profile?: string;
+  headline?: string;
 };

@@ -4,6 +4,7 @@ export const userTypeSchema = `#graphql
         familyName: String!
         givenName: String!
         profile: String!
+        headline: String
         createdAt: String!
         updatedAt: String!
     }
@@ -26,5 +27,6 @@ export const userTypeSchema = `#graphql
         familyName: String
         givenName: String
         profile: String
+        headline: String
     }
 `;
