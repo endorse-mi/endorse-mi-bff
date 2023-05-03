@@ -5,6 +5,7 @@ export const userTypeSchema = `#graphql
         givenName: String!
         profile: String!
         headline: String
+        balance: String!
         createdAt: String!
         updatedAt: String!
     }

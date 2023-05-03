@@ -11,6 +11,7 @@ export const postTypeSchema = `#graphql
         content: String!
         maxQuota: Int!
         remainingQuota: Int!
+        createdAt: String!
         author: User!
     }
 

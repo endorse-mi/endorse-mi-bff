@@ -9,6 +9,10 @@ class PostInteractionService {
     return await postInteractionRepository.getInteractionById(postId, userId);
   };
 
+  getInteractionsByPostId = async (postId: string) => {
+    return await postInteractionRepository.getInteractionsByPostId(postId);
+  };
+
   claimInteraction = async (postId: string, userId: string) => {
     const existingInteraction = await postInteractionRepository.getInteractionById(postId, userId);
     if (existingInteraction) {
@@ -17,7 +21,7 @@ class PostInteractionService {
 
     const post = await postRepository.getPostById(postId);
     await postRepository.setRemainingQuota(postId, post.remainingQuota - 1);
-    await postInteractionRepository.createInteraction({ postId, userId, authorId: post.userId, state: PostInteractionState.CLAIMED });
+    await postInteractionRepository.createInteraction({ postId, userId, state: PostInteractionState.CLAIMED });
   };
 
   confirmInteraction = async (postId: string, userId: string) => {
@@ -30,7 +34,7 @@ class PostInteractionService {
     const nConfirmed = post.nConfirmed + 1;
     await postRepository.setNConfirmed(postId, nConfirmed);
     await balanceService.rewardPost(userId, post.type as PostType);
-    await postInteractionRepository.updateInteraction({ postId, userId, authorId: post.userId, state: PostInteractionState.CONFIRMED });
+    await postInteractionRepository.updateInteraction({ postId, userId, state: PostInteractionState.CONFIRMED });
 
     if (nConfirmed >= post.maxQuota) {
       await postRepository.deletePost(post.postId);
@@ -46,7 +50,7 @@ class PostInteractionService {
 
     const post = await postRepository.getPostById(postId);
     await postRepository.setRemainingQuota(postId, post.remainingQuota + 1);
-    await postInteractionRepository.updateInteraction({ postId, userId, authorId: post.userId, state: PostInteractionState.REJECTED });
+    await postInteractionRepository.updateInteraction({ postId, userId, state: PostInteractionState.REJECTED });
   };
 }
 

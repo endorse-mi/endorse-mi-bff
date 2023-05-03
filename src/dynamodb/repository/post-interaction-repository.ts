@@ -17,6 +17,10 @@ class PostInteractionRepository {
     return await this.postInteractionEntity.get({ postId, userId });
   };
 
+  getInteractionsByPostId = async (postId: string) => {
+    return await this.postInteractionEntity.get({ postId });
+  };
+
   createInteraction = async (request: PostInteraction) => {
     return await this.postInteractionEntity.create(request);
   };
