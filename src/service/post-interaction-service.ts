@@ -2,18 +2,22 @@ import { PostInteractionState } from '../dynamodb/model/post-interaction-model';
 import { PostType } from '../dynamodb/model/post-model';
 import postInteractionRepository from '../dynamodb/repository/post-interaction-repository';
 import postRepository from '../dynamodb/repository/post-repository';
+import logger from '../utils/logger';
 import balanceService from './balance-service';
 
 class PostInteractionService {
   getInteraction = async (postId: string, userId: string) => {
+    logger.debug({ postId, userId }, 'PostInteractionService -> getInteraction');
     return await postInteractionRepository.getInteractionById(postId, userId);
   };
 
   getInteractionsByPostId = async (postId: string) => {
+    logger.debug({ postId }, 'PostInteractionService -> getInteractionsByPostId');
     return await postInteractionRepository.getInteractionsByPostId(postId);
   };
 
   claimInteraction = async (postId: string, userId: string) => {
+    logger.debug({ postId, userId }, 'PostInteractionService -> claimInteraction');
     const existingInteraction = await postInteractionRepository.getInteractionById(postId, userId);
     if (existingInteraction) {
       throw new Error(`The user ${userId} has already claimed`);
@@ -25,6 +29,7 @@ class PostInteractionService {
   };
 
   confirmInteraction = async (postId: string, userId: string) => {
+    logger.debug({ postId }, 'PostInteractionService -> confirmInteraction');
     const existingInteraction = await postInteractionRepository.getInteractionById(postId, userId);
     if ((existingInteraction && existingInteraction.state !== PostInteractionState.CLAIMED) || !existingInteraction) {
       throw new Error(`The user ${userId} can't be confirmed`);
@@ -43,6 +48,7 @@ class PostInteractionService {
   };
 
   rejectInteraction = async (postId: string, userId: string) => {
+    logger.debug({ postId }, 'PostInteractionService -> rejectInteraction');
     const existingInteraction = await postInteractionRepository.getInteractionById(postId, userId);
     if ((existingInteraction && existingInteraction.state !== PostInteractionState.CLAIMED) || !existingInteraction) {
       throw new Error(`The user ${userId} can't be rejected`);

@@ -3,13 +3,13 @@ import postService from '../../../service/post-service';
 import { requireSameUser } from '../../../utils/authorization';
 
 export const createPost = async (parent, { request }: { request: PostCreateRequest }, context) => {
-  console.log(`Creating post for ${request.userId}`);
+  console.log(`Creating post for ${context.userId}`);
   try {
-    requireSameUser(context.userId, request.userId);
+    request.userId = context.userId;
     const post = await postService.createPost(request);
     return {
       post,
-      message: `Created post ${request.userId}`,
+      message: `Created post ${context.userId}`,
       success: true,
     };
   } catch (err) {

@@ -16,10 +16,6 @@ export const PostInteractionSchema = new Schema(
       required: true,
       rangeKey: true,
     },
-    authorId: {
-      type: String,
-      required: true,
-    },
     state: {
       type: String,
       required: true,

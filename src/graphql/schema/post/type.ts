@@ -22,7 +22,6 @@ export const postTypeSchema = `#graphql
     }
 
     input PostCreateInput {
-        userId: ID!
         type: PostType!
         content: String!
     }

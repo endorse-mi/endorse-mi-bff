@@ -1,8 +1,10 @@
 import postInteractionService from '../../../service/post-interaction-service';
 import postService from '../../../service/post-service';
 import { requireDifferentUser, requireSameUser } from '../../../utils/authorization';
+import logger from '../../../utils/logger';
 
 export const claimPostInteraction = async (parent, { postId }: { postId: string }, context) => {
+  logger.info({ postId, userId: context.userId }, 'Start claimPostInteraction resolver');
   const userId: string = context.userId;
   console.log(`Claiming post ${postId} interaction by user ${userId}`);
 
@@ -30,7 +32,7 @@ export const claimPostInteraction = async (parent, { postId }: { postId: string 
 };
 
 export const confirmPostInteraction = async (parent, { postId, userId }: { postId: string; userId: string }, context) => {
-  console.log(`Confirming post ${postId} interaction by user ${userId}`);
+  logger.info({ postId, userId }, 'Start confirmPostInteraction resolver');
 
   const post = await postService.getPostById(postId);
   if (!post) {
@@ -56,7 +58,7 @@ export const confirmPostInteraction = async (parent, { postId, userId }: { postI
 };
 
 export const rejectPostInteraction = async (parent, { postId, userId }: { postId: string; userId: string }, context) => {
-  console.log(`Rejecting post ${postId} interaction by user ${userId}`);
+  logger.info({ postId, userId }, 'Start rejectPostInteraction resolver');
 
   const post = await postService.getPostById(postId);
   if (!post) {

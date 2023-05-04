@@ -3,6 +3,7 @@ import utc from 'dayjs/plugin/utc';
 import { v4 as uuidv4 } from 'uuid';
 import { PostCreateRequest, PostType } from '../dynamodb/model/post-model';
 import postRepository from '../dynamodb/repository/post-repository';
+import logger from '../utils/logger';
 import balanceService from './balance-service';
 
 dayjs.extend(utc);
@@ -16,6 +17,7 @@ class PostService {
   };
 
   getPostById = async (id: string) => {
+    logger.debug({ id }, 'PostService -> getPostById');
     return await postRepository.getPostById(id);
   };
 
