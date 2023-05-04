@@ -1,5 +1,5 @@
 export const postInteractionTypeSchema = `#graphql
-    enum InteractionState {
+    enum PostInteractionState {
         CLAIMED
         CONFIRMED
         REJECTED
@@ -8,7 +8,7 @@ export const postInteractionTypeSchema = `#graphql
     type PostInteraction {
         postId: ID!
         userId: ID!
-        state: InteractionState!
+        state: PostInteractionState!
     }
 
     type PostInteractionResponse implements BaseResponse {

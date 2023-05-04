@@ -11,7 +11,7 @@ import userService from './user-service';
 const UserPoolId = 'us-east-1_KIHMSNLAY';
 const poolData = {
   UserPoolId,
-  ClientId: '6s0jgosqonq2k57gm6pftsv2td',
+  ClientId: '2vph59q6m94a1etr4togpiqs0c',
 };
 
 Amplify.configure({
