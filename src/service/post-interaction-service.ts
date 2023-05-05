@@ -6,9 +6,9 @@ import logger from '../utils/logger';
 import balanceService from './balance-service';
 
 class PostInteractionService {
-  getInteraction = async (postId: string, userId: string) => {
-    logger.debug({ postId, userId }, 'PostInteractionService -> getInteraction');
-    return await postInteractionRepository.getInteractionById(postId, userId);
+  getInteraction = async (postId: string, fulfillerId: string) => {
+    logger.debug({ postId, fulfillerId }, 'PostInteractionService -> getInteraction');
+    return await postInteractionRepository.getInteractionById(postId, fulfillerId);
   };
 
   getInteractionsByPostId = async (postId: string) => {
@@ -16,30 +16,30 @@ class PostInteractionService {
     return await postInteractionRepository.getInteractionsByPostId(postId);
   };
 
-  claimInteraction = async (postId: string, userId: string) => {
-    logger.debug({ postId, userId }, 'PostInteractionService -> claimInteraction');
-    const existingInteraction = await postInteractionRepository.getInteractionById(postId, userId);
+  claimInteraction = async (postId: string, fulfillerId: string) => {
+    logger.debug({ postId, fulfillerId }, 'PostInteractionService -> claimInteraction');
+    const existingInteraction = await postInteractionRepository.getInteractionById(postId, fulfillerId);
     if (existingInteraction) {
-      throw new Error(`The user ${userId} has already claimed`);
+      throw new Error(`The user ${fulfillerId} has already claimed`);
     }
 
     const post = await postRepository.getPostById(postId);
     await postRepository.setRemainingQuota(postId, post.remainingQuota - 1);
-    await postInteractionRepository.createInteraction({ postId, userId, state: PostInteractionState.CLAIMED });
+    await postInteractionRepository.createInteraction({ postId, fulfillerId, state: PostInteractionState.CLAIMED });
   };
 
-  confirmInteraction = async (postId: string, userId: string) => {
-    logger.debug({ postId }, 'PostInteractionService -> confirmInteraction');
-    const existingInteraction = await postInteractionRepository.getInteractionById(postId, userId);
+  confirmInteraction = async (postId: string, fulfillerId: string) => {
+    logger.debug({ postId, fulfillerId }, 'PostInteractionService -> confirmInteraction');
+    const existingInteraction = await postInteractionRepository.getInteractionById(postId, fulfillerId);
     if ((existingInteraction && existingInteraction.state !== PostInteractionState.CLAIMED) || !existingInteraction) {
-      throw new Error(`The user ${userId} can't be confirmed`);
+      throw new Error(`The user ${fulfillerId} can't be confirmed`);
     }
 
     const post = await postRepository.getPostById(postId);
     const nConfirmed = post.nConfirmed + 1;
     await postRepository.setNConfirmed(postId, nConfirmed);
-    await balanceService.rewardPost(userId, post.type as PostType);
-    await postInteractionRepository.updateInteraction({ postId, userId, state: PostInteractionState.CONFIRMED });
+    await balanceService.rewardPost(fulfillerId, post.type as PostType);
+    await postInteractionRepository.updateInteraction({ postId, fulfillerId, state: PostInteractionState.CONFIRMED });
 
     if (nConfirmed >= post.maxQuota) {
       await postRepository.deletePost(post.postId);
@@ -47,16 +47,16 @@ class PostInteractionService {
     }
   };
 
-  rejectInteraction = async (postId: string, userId: string) => {
-    logger.debug({ postId }, 'PostInteractionService -> rejectInteraction');
-    const existingInteraction = await postInteractionRepository.getInteractionById(postId, userId);
+  rejectInteraction = async (postId: string, fulfillerId: string) => {
+    logger.debug({ postId, fulfillerId }, 'PostInteractionService -> rejectInteraction');
+    const existingInteraction = await postInteractionRepository.getInteractionById(postId, fulfillerId);
     if ((existingInteraction && existingInteraction.state !== PostInteractionState.CLAIMED) || !existingInteraction) {
-      throw new Error(`The user ${userId} can't be rejected`);
+      throw new Error(`The user ${fulfillerId} can't be rejected`);
     }
 
     const post = await postRepository.getPostById(postId);
     await postRepository.setRemainingQuota(postId, post.remainingQuota + 1);
-    await postInteractionRepository.updateInteraction({ postId, userId, state: PostInteractionState.REJECTED });
+    await postInteractionRepository.updateInteraction({ postId, fulfillerId, state: PostInteractionState.REJECTED });
   };
 }
 

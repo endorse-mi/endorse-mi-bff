@@ -21,12 +21,12 @@ class PostService {
     return await postRepository.getPostById(id);
   };
 
-  getPostsByUserId = async (userId: string) => {
-    return await postRepository.getPostsByUserId(userId);
+  getPostsByAuthorId = async (authorId: string) => {
+    return await postRepository.getPostsByAuthorId(authorId);
   };
 
   createPost = async (request: PostCreateRequest) => {
-    await balanceService.purchasePost(request.userId, request.type);
+    await balanceService.purchasePost(request.authorId, request.type);
     const post = this.toPost(request);
     return await postRepository.createPost(post);
   };

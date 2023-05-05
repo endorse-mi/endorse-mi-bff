@@ -7,10 +7,10 @@ export const PostSchema = new Schema(
       hashKey: true,
       required: true,
     },
-    userId: {
+    authorId: {
       type: String,
       index: {
-        name: 'userId-index',
+        name: 'authorId-index',
         type: 'global',
         rangeKey: 'createdAt',
       },

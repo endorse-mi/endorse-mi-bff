@@ -2,7 +2,7 @@ import { Item } from 'dynamoose/dist/Item';
 
 export type Post = {
   postId: string;
-  userId: string;
+  authorId: string;
   type: PostType;
   content: string;
   maxQuota: number;
@@ -13,7 +13,7 @@ export type Post = {
 
 export class PostModel extends Item {
   postId: string;
-  userId: string;
+  authorId: string;
   type: string;
   content: string;
   maxQuota: number;
@@ -28,12 +28,12 @@ export enum PostType {
 }
 
 export type PostCreateRequest = {
-  userId: string;
+  authorId: string;
   type: PostType;
   content: string;
 };
 
 export type PostDeleteRequest = {
-  userId: string;
+  authorId: string;
   postId: string;
 };

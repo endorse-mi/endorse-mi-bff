@@ -11,7 +11,7 @@ export const PostInteractionSchema = new Schema(
         rangeKey: 'state',
       },
     },
-    userId: {
+    fulfillerId: {
       type: String,
       required: true,
       rangeKey: true,

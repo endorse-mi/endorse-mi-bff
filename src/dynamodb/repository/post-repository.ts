@@ -24,9 +24,9 @@ class PostRepository {
     return await this.postEntity.get({ postId: id });
   };
 
-  getPostsByUserId = async (id: string) => {
-    logger.debug({ id }, 'PostRepository -> getPostsByUserId');
-    return await this.postEntity.query('userId').eq(id).exec();
+  getPostsByAuthorId = async (id: string) => {
+    logger.debug({ id }, 'PostRepository -> getPostsByAuthorId');
+    return await this.postEntity.query('authorId').eq(id).exec();
   };
 
   createPost = async (request: Post) => {

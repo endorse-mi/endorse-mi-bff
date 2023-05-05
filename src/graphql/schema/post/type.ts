@@ -6,7 +6,7 @@ export const postTypeSchema = `#graphql
 
     type Post {
         postId: ID!
-        userId: ID!
+        authorId: ID!
         type: PostType!
         content: String!
         maxQuota: Int!
@@ -16,7 +16,7 @@ export const postTypeSchema = `#graphql
     }
 
     type PostsResponse implements BaseResponse {
-        posts: [Post]!
+        posts: [Post!]!
         success: Boolean!
         message: String!
     }

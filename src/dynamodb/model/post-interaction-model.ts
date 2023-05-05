@@ -2,13 +2,13 @@ import { Item } from 'dynamoose/dist/Item';
 
 export type PostInteraction = {
   postId: string;
-  userId: string;
+  fulfillerId: string;
   state: PostInteractionState;
 };
 
 export class PostInteractionModel extends Item {
   postId: string;
-  userId: string;
+  fulfillerId: string;
   state: string;
 }
 
@@ -20,6 +20,6 @@ export enum PostInteractionState {
 
 export type PostInteractionUpsertRequest = {
   postId: string;
-  userId: string;
+  fulfillerId: string;
   state: PostInteractionState;
 };

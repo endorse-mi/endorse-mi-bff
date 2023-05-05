@@ -1,5 +1,5 @@
 import { claimPostInteraction, confirmPostInteraction, rejectPostInteraction } from './mutation';
-import { postInteraction, postInteractionsByPostId } from './query';
+import { fulfiller, postInteraction, postInteractionsByPostId } from './query';
 
 export const postInteractionResolvers = {
   Query: {
@@ -10,5 +10,8 @@ export const postInteractionResolvers = {
     claimPostInteraction,
     confirmPostInteraction,
     rejectPostInteraction,
+  },
+  PostInteraction: {
+    fulfiller,
   },
 };

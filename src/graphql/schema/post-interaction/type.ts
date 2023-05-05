@@ -7,8 +7,9 @@ export const postInteractionTypeSchema = `#graphql
 
     type PostInteraction {
         postId: ID!
-        userId: ID!
+        fulfillerId: ID!
         state: PostInteractionState!
+        fulfiller: User!
     }
 
     type PostInteractionResponse implements BaseResponse {

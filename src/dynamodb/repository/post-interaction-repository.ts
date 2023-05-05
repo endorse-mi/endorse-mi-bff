@@ -14,9 +14,9 @@ class PostInteractionRepository {
     });
   }
 
-  getInteractionById = async (postId: string, userId: string) => {
-    logger.debug({ postId, userId }, 'PostInteractionRepository -> getInteractionById');
-    return await this.postInteractionEntity.get({ postId, userId });
+  getInteractionById = async (postId: string, fulfillerId: string) => {
+    logger.debug({ postId, fulfillerId }, 'PostInteractionRepository -> getInteractionById');
+    return await this.postInteractionEntity.get({ postId, fulfillerId });
   };
 
   getInteractionsByPostId = async (postId: string) => {
@@ -38,7 +38,7 @@ class PostInteractionRepository {
     logger.debug({ postId }, 'PostInteractionRepository -> deleteInteractionsByPostId');
     const interactions = await this.postInteractionEntity.query('postId').eq(postId).all().exec();
     logger.debug({ interactions }, 'Interactions');
-    const interactionKeys = interactions.map((interaction) => ({ postId: interaction.postId, userId: interaction.userId }));
+    const interactionKeys = interactions.map((interaction) => ({ postId: interaction.postId, fulfillerId: interaction.fulfillerId }));
     await this.postInteractionEntity.batchDelete(interactionKeys);
   };
 }

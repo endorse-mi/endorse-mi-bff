@@ -5,7 +5,7 @@ import { requireSameUser } from '../../../utils/authorization';
 export const createPost = async (parent, { request }: { request: PostCreateRequest }, context) => {
   console.log(`Creating post for ${context.userId}`);
   try {
-    request.userId = context.userId;
+    request.authorId = context.userId;
     const post = await postService.createPost(request);
     return {
       post,
@@ -28,7 +28,7 @@ export const deletePost = async (parent, { id }: { id: string }, context) => {
       throw new Error(`Post ${id} doesn't exist`);
     }
 
-    requireSameUser(context.userId, post.userId);
+    requireSameUser(context.userId, post.authorId);
     await postService.deletePost(id);
     return {
       post,

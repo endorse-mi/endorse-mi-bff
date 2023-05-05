@@ -8,11 +8,11 @@ export const postInteractionMutationSchema = `#graphql
         """
         Call by the author of the post to confirm a user has fulfilled the request.
         """
-        confirmPostInteraction(postId: ID!, userId: ID!): PostInteractionResponse
+        confirmPostInteraction(postId: ID!, fulfillerId: ID!): PostInteractionResponse
 
         """
         Call by the author of the post to reject a user's claim.
         """
-        rejectPostInteraction(postId: ID!, userId: ID!): PostInteractionResponse
+        rejectPostInteraction(postId: ID!, fulfillerId: ID!): PostInteractionResponse
     }
 `;

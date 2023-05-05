@@ -4,9 +4,9 @@ import { requireDifferentUser, requireSameUser } from '../../../utils/authorizat
 import logger from '../../../utils/logger';
 
 export const claimPostInteraction = async (parent, { postId }: { postId: string }, context) => {
-  logger.info({ postId, userId: context.userId }, 'Start claimPostInteraction resolver');
-  const userId: string = context.userId;
-  console.log(`Claiming post ${postId} interaction by user ${userId}`);
+  logger.info({ postId, fulfiller: context.userId }, 'Start claimPostInteraction resolver');
+  const fulfiller: string = context.userId;
+  console.log(`Claiming post ${postId} interaction by user ${fulfiller}`);
 
   const post = await postService.getPostById(postId);
   if (!post) {
@@ -17,10 +17,10 @@ export const claimPostInteraction = async (parent, { postId }: { postId: string 
   }
 
   try {
-    requireDifferentUser(userId, post.userId);
-    await postInteractionService.claimInteraction(postId, userId);
+    requireDifferentUser(fulfiller, post.authorId);
+    await postInteractionService.claimInteraction(postId, fulfiller);
     return {
-      message: `Interaction of post ${postId} has been claimed by ${userId}`,
+      message: `Interaction of post ${postId} has been claimed by ${fulfiller}`,
       success: true,
     };
   } catch (err) {
@@ -31,8 +31,8 @@ export const claimPostInteraction = async (parent, { postId }: { postId: string 
   }
 };
 
-export const confirmPostInteraction = async (parent, { postId, userId }: { postId: string; userId: string }, context) => {
-  logger.info({ postId, userId }, 'Start confirmPostInteraction resolver');
+export const confirmPostInteraction = async (parent, { postId, fulfillerId }: { postId: string; fulfillerId: string }, context) => {
+  logger.info({ postId, fulfillerId }, 'Start confirmPostInteraction resolver');
 
   const post = await postService.getPostById(postId);
   if (!post) {
@@ -43,10 +43,10 @@ export const confirmPostInteraction = async (parent, { postId, userId }: { postI
   }
 
   try {
-    requireSameUser(context.userId, post.userId);
-    await postInteractionService.confirmInteraction(postId, userId);
+    requireSameUser(context.userId, post.authorId);
+    await postInteractionService.confirmInteraction(postId, fulfillerId);
     return {
-      message: `Interaction of post ${postId} from ${userId} has been confirmed by ${post.userId}`,
+      message: `Interaction of post ${postId} from ${fulfillerId} has been confirmed by ${post.authorId}`,
       success: true,
     };
   } catch (err) {
@@ -57,8 +57,8 @@ export const confirmPostInteraction = async (parent, { postId, userId }: { postI
   }
 };
 
-export const rejectPostInteraction = async (parent, { postId, userId }: { postId: string; userId: string }, context) => {
-  logger.info({ postId, userId }, 'Start rejectPostInteraction resolver');
+export const rejectPostInteraction = async (parent, { postId, fulfillerId }: { postId: string; fulfillerId: string }, context) => {
+  logger.info({ postId, fulfillerId }, 'Start rejectPostInteraction resolver');
 
   const post = await postService.getPostById(postId);
   if (!post) {
@@ -69,10 +69,10 @@ export const rejectPostInteraction = async (parent, { postId, userId }: { postId
   }
 
   try {
-    requireSameUser(context.userId, post.userId);
-    await postInteractionService.rejectInteraction(postId, userId);
+    requireSameUser(context.userId, post.authorId);
+    await postInteractionService.rejectInteraction(postId, fulfillerId);
     return {
-      message: `Interaction of post ${postId} from ${userId} has been rejected`,
+      message: `Interaction of post ${postId} from ${fulfillerId} has been rejected`,
       success: true,
     };
   } catch (err) {

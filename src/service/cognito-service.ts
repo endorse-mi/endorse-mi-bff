@@ -8,10 +8,10 @@ import { SignInRequest } from '../rest/auth/sign-in';
 import { SignUpRequest } from '../rest/auth/sign-up';
 import userService from './user-service';
 
-const UserPoolId = 'us-east-1_1FR0LPFZc';
+const UserPoolId = 'us-east-1_Lys4ah2yx';
 const poolData = {
   UserPoolId,
-  ClientId: '7oqgn04sk3p2491riccul9b8g0',
+  ClientId: '15mctmddp5onrd2t8ckbii3ro8',
 };
 
 Amplify.configure({

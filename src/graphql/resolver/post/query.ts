@@ -14,12 +14,12 @@ export const post = async (parent: any, { id }: { id: string }) => {
   return post;
 };
 
-export const postsByUserId = async (parent: any, { userId }: { userId: string }) => {
-  logger.info({ userId }, 'Getting posts');
-  return await postService.getPostsByUserId(userId);
+export const postsByAuthorId = async (parent: any, { authorId }: { authorId: string }) => {
+  logger.info({ authorId }, 'Getting posts');
+  return await postService.getPostsByAuthorId(authorId);
 };
 
 export const author = async (parent: any) => {
   logger.info({ parent }, 'Getting author');
-  return userService.getUserById(parent.userId);
+  return userService.getUserById(parent.authorId);
 };

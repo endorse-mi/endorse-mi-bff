@@ -1,6 +1,6 @@
 export const postInteractionQuerySchema = `#graphql
     type Query {
-        postInteraction(postId: ID!, userId: ID!): PostInteraction
+        postInteraction(postId: ID!, fulfillerId: ID!): PostInteraction
         postInteractionsByPostId(postId: ID!): [PostInteraction]!
     }
 `;
