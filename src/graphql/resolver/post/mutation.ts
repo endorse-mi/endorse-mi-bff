@@ -1,12 +1,12 @@
-import { PostCreateRequest } from '../../../dynamodb/model/post-model';
+import { PostCreateInput } from '../../../dynamodb/model/post-model';
 import postService from '../../../service/post-service';
 import { requireSameUser } from '../../../utils/authorization';
 
-export const createPost = async (parent, { request }: { request: PostCreateRequest }, context) => {
+export const createPost = async (parent, { input }: { input: PostCreateInput }, context) => {
   console.log(`Creating post for ${context.userId}`);
   try {
-    request.authorId = context.userId;
-    const post = await postService.createPost(request);
+    input.authorId = context.userId;
+    const post = await postService.createPost(input);
     return {
       post,
       message: `Created post ${context.userId}`,

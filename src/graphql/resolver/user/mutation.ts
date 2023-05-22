@@ -1,14 +1,14 @@
-import { UserCreateRequest, UserUpdateRequest } from '../../../dynamodb/model/user-model';
+import { UserCreateInput, UserUpdateInput } from '../../../dynamodb/model/user-model';
 import userService from '../../../service/user-service';
 import { requireAdmin, requireSameUser } from '../../../utils/authorization';
 
-export const createUser = async (parent, { request }: { request: UserCreateRequest }, context) => {
+export const createUser = async (parent, { input }: { input: UserCreateInput }, context) => {
   try {
     requireAdmin(context.userId);
-    const user = await userService.createUser(request);
+    const user = await userService.createUser(input);
     return {
       user,
-      message: `Created user ${request.userId}`,
+      message: `Created user ${input.userId}`,
       success: true,
     };
   } catch (err) {
@@ -19,13 +19,13 @@ export const createUser = async (parent, { request }: { request: UserCreateReque
   }
 };
 
-export const updateUser = async (parent, { request }: { request: UserUpdateRequest }, context) => {
+export const updateUser = async (parent, { input }: { input: UserUpdateInput }, context) => {
   try {
-    requireSameUser(context.userId, request.userId);
-    const user = await userService.updateUser(request);
+    requireSameUser(context.userId, input.userId);
+    const user = await userService.updateUser(input);
     return {
       user,
-      message: `Updated user ${request.userId}`,
+      message: `Updated user ${input.userId}`,
       success: true,
     };
   } catch (err) {

@@ -1,4 +1,4 @@
-import { UserCreateRequest, UserUpdateRequest } from '../dynamodb/model/user-model';
+import { UserCreateInput, UserUpdateInput } from '../dynamodb/model/user-model';
 import userRepository from '../dynamodb/repository/user-repository';
 import cognitoService from './cognito-service';
 
@@ -11,11 +11,11 @@ class UserService {
     return await userRepository.getUserBalanceById(id);
   };
 
-  createUser = async (request: UserCreateRequest) => {
+  createUser = async (request: UserCreateInput) => {
     return await userRepository.createUser(request);
   };
 
-  updateUser = async (request: UserUpdateRequest) => {
+  updateUser = async (request: UserUpdateInput) => {
     return await userRepository.updateUser(request);
   };
 

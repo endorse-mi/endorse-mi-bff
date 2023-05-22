@@ -1,7 +1,8 @@
 import * as dynamoose from 'dynamoose';
+import { SortOrder } from 'dynamoose/dist/General';
 import { Model } from 'dynamoose/dist/Model';
 import logger from '../../utils/logger';
-import { Post, PostModel } from '../model/post-model';
+import { Post, PostModel, PostType } from '../model/post-model';
 import { PostSchema } from '../schema/post-schema';
 
 class PostRepository {
@@ -11,12 +12,20 @@ class PostRepository {
     this.postEntity = dynamoose.model<PostModel>('post-table-prod', PostSchema, { create: false, waitForActive: false });
   }
 
-  getPosts = async (startKey?: string, limit = 10) => {
+  getPosts = async (type: PostType, startKey?: string, limit = 10) => {
     logger.debug({ startKey, limit }, 'PostRepository -> getPosts');
     if (startKey) {
-      return await this.postEntity.scan().startAt({ postId: startKey }).limit(limit).exec();
+      return await this.postEntity
+        .query('type')
+        .eq(type)
+        .using('type-index')
+        .sort(SortOrder.descending)
+        .startAt({ postId: startKey })
+        .limit(limit)
+        .exec();
     }
-    return await this.postEntity.scan().limit(limit).exec();
+
+    return await this.postEntity.query('type').eq(type).using('type-index').sort(SortOrder.descending).limit(limit).exec();
   };
 
   getPostById = async (id: string) => {

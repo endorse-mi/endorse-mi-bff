@@ -27,13 +27,18 @@ export enum PostType {
   RECOMMEND = 'RECOMMEND',
 }
 
-export type PostCreateRequest = {
+export type PostsGetInput = {
+  type: PostType;
+  startKey?: string;
+};
+
+export type PostCreateInput = {
   authorId: string;
   type: PostType;
   content: string;
 };
 
-export type PostDeleteRequest = {
+export type PostDeleteInput = {
   authorId: string;
   postId: string;
 };

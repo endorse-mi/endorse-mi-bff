@@ -11,14 +11,14 @@ export class UserModel extends Item {
   updatedAt: string;
 }
 
-export type UserCreateRequest = {
+export type UserCreateInput = {
   userId: string;
   familyName: string;
   givenName: string;
   profile: string;
 };
 
-export type UserUpdateRequest = {
+export type UserUpdateInput = {
   userId: string;
   familyName?: string;
   givenName?: string;

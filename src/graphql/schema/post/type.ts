@@ -21,6 +21,11 @@ export const postTypeSchema = `#graphql
         message: String!
     }
 
+    input PostsGetInput {
+        type: PostType!
+        startKey: String
+    }
+
     input PostCreateInput {
         type: PostType!
         content: String!

@@ -17,9 +17,3 @@ export enum PostInteractionState {
   CONFIRMED = 'CONFIRMED',
   REJECTED = 'REJECTED',
 }
-
-export type PostInteractionUpsertRequest = {
-  postId: string;
-  fulfillerId: string;
-  state: PostInteractionState;
-};

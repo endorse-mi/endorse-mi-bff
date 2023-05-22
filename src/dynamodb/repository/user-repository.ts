@@ -1,7 +1,7 @@
 import * as dynamoose from 'dynamoose';
 import { Model } from 'dynamoose/dist/Model';
 import { INITIAL_BALANCE } from '../../service/balance-service';
-import { UserCreateRequest, UserModel, UserUpdateRequest } from '../model/user-model';
+import { UserCreateInput, UserModel, UserUpdateInput } from '../model/user-model';
 import { UserSchema } from '../schema/user-schema';
 
 class UserRepository {
@@ -20,11 +20,11 @@ class UserRepository {
     return (await this.userEntity.get({ userId: id }, { attributes: ['balance'] })).balance;
   };
 
-  createUser = async (request: UserCreateRequest) => {
+  createUser = async (request: UserCreateInput) => {
     return await this.userEntity.create({ balance: INITIAL_BALANCE, ...request });
   };
 
-  updateUser = async (request: UserUpdateRequest) => {
+  updateUser = async (request: UserUpdateInput) => {
     return await this.userEntity.update(request);
   };
 

@@ -19,6 +19,11 @@ export const PostSchema = new Schema(
       type: String,
       required: true,
       enum: ['ENDORSE', 'RECOMMEND'],
+      index: {
+        name: 'type-index',
+        type: 'global',
+        rangeKey: 'createdAt',
+      },
     },
     content: {
       type: String,

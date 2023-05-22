@@ -1,10 +1,11 @@
+import { PostsGetInput } from '../../../dynamodb/model/post-model';
 import postService from '../../../service/post-service';
 import userService from '../../../service/user-service';
 import logger from '../../../utils/logger';
 
-export const posts = async (parent: any, { startKey }: { startKey?: string }) => {
-  logger.info({ startKey }, 'Getting posts');
-  const posts = await postService.getPosts(startKey);
+export const posts = async (parent: any, { input: { type, startKey } }: { input: PostsGetInput }) => {
+  logger.info({ type, startKey }, 'Getting posts');
+  const posts = await postService.getPosts(type, startKey);
   return posts;
 };
 
