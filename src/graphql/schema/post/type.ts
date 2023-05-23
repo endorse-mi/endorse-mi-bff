@@ -4,6 +4,18 @@ export const postTypeSchema = `#graphql
         RECOMMEND
     }
 
+    input PostLastKey {
+        postId: String!
+        type: PostType!
+        createdAt: String!
+    }
+
+    type PostKey {
+        postId: String!
+        type: PostType!
+        createdAt: String!
+    }
+
     type Post {
         postId: ID!
         authorId: ID!
@@ -17,13 +29,14 @@ export const postTypeSchema = `#graphql
 
     type PostsResponse implements BaseResponse {
         posts: [Post!]!
+        lastKey: PostKey
         success: Boolean!
         message: String!
     }
 
     input PostsGetInput {
         type: PostType!
-        startKey: String
+        startKey: PostLastKey
     }
 
     input PostCreateInput {

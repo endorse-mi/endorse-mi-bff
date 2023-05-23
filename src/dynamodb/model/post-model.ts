@@ -27,9 +27,15 @@ export enum PostType {
   RECOMMEND = 'RECOMMEND',
 }
 
+export type PostLastKey = {
+  postId: string;
+  type: PostType;
+  createdAt: string;
+};
+
 export type PostsGetInput = {
   type: PostType;
-  startKey?: string;
+  startKey?: PostLastKey;
 };
 
 export type PostCreateInput = {

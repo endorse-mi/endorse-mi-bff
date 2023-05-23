@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import { v4 as uuidv4 } from 'uuid';
-import { PostCreateInput, PostType } from '../dynamodb/model/post-model';
+import { PostCreateInput, PostLastKey, PostType } from '../dynamodb/model/post-model';
 import postRepository from '../dynamodb/repository/post-repository';
 import logger from '../utils/logger';
 import balanceService from './balance-service';
@@ -12,7 +12,7 @@ const ENDORSEMENT_POST_QUOTA = 3;
 const RECOMMENDATION_POST_QUOTA = 1;
 
 class PostService {
-  getPosts = async (type: PostType, startKey?: string) => {
+  getPosts = async (type: PostType, startKey?: PostLastKey) => {
     return await postRepository.getPosts(type, startKey);
   };
 

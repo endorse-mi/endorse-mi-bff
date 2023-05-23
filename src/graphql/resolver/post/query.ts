@@ -6,7 +6,12 @@ import logger from '../../../utils/logger';
 export const posts = async (parent: any, { input: { type, startKey } }: { input: PostsGetInput }) => {
   logger.info({ type, startKey }, 'Getting posts');
   const posts = await postService.getPosts(type, startKey);
-  return posts;
+  return {
+    posts: posts,
+    lastKey: posts.lastKey,
+    success: true,
+    message: `Returning posts with start key ${startKey}`,
+  };
 };
 
 export const post = async (parent: any, { id }: { id: string }) => {
@@ -21,6 +26,5 @@ export const postsByAuthorId = async (parent: any, { authorId }: { authorId: str
 };
 
 export const author = async (parent: any) => {
-  logger.info({ parent }, 'Getting author');
   return userService.getUserById(parent.authorId);
 };
