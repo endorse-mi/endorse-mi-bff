@@ -1,6 +1,7 @@
 import { AuthorizationType, JsonSchemaType, JsonSchemaVersion, LambdaIntegration, RequestValidator } from 'aws-cdk-lib/aws-apigateway';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
+import { ENVIRONMENT } from '../../../config';
 import { Foundation } from '../../../foundation';
 import { functionPropsFor } from '../../../helpers/function-props';
 
@@ -8,7 +9,7 @@ export default function addSignInEndpoint(scope: Construct, foundation: Foundati
   const lambda = new NodejsFunction(
     scope,
     'endorse-mi-bff-sign-in',
-    functionPropsFor({ name: 'endorse-mi-bff-sign-in-prod', description: 'Sign in', entry: 'rest/auth/sign-in.ts' })
+    functionPropsFor({ name: `endorse-mi-bff-sign-in-${ENVIRONMENT}`, description: 'Sign in', entry: 'rest/auth/sign-in.ts' })
   );
 
   const requestModel = foundation.api.addModel('sign-in-request', {

@@ -1,6 +1,7 @@
 import { AuthorizationType, JsonSchemaType, JsonSchemaVersion, LambdaIntegration, RequestValidator } from 'aws-cdk-lib/aws-apigateway';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
+import { ENVIRONMENT } from '../../../config';
 import { Foundation } from '../../../foundation';
 import { functionPropsFor } from '../../../helpers/function-props';
 
@@ -9,7 +10,7 @@ export default function addForgotPasswordEndpoint(scope: Construct, foundation: 
     scope,
     'endorse-mi-bff-forgot-password',
     functionPropsFor({
-      name: 'endorse-mi-bff-forgot-password-prod',
+      name: `endorse-mi-bff-forgot-password-${ENVIRONMENT}`,
       description: 'Send a forgot password email to the user',
       entry: 'rest/auth/forgot-password.ts',
     })

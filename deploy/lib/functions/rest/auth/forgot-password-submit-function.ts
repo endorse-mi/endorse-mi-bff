@@ -1,6 +1,7 @@
 import { AuthorizationType, JsonSchemaType, JsonSchemaVersion, LambdaIntegration, RequestValidator } from 'aws-cdk-lib/aws-apigateway';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
+import { ENVIRONMENT } from '../../../config';
 import { Foundation } from '../../../foundation';
 import { functionPropsFor } from '../../../helpers/function-props';
 
@@ -9,7 +10,7 @@ export default function addForgotPasswordSubmitEndpoint(scope: Construct, founda
     scope,
     'endorse-mi-bff-forgot-password-submit',
     functionPropsFor({
-      name: 'endorse-mi-bff-forgot-password-submit-prod',
+      name: `endorse-mi-bff-forgot-password-submit-${ENVIRONMENT}`,
       description: 'Submit a new password',
       entry: 'rest/auth/forgot-password-submit.ts',
     })

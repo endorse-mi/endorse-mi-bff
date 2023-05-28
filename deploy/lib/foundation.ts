@@ -4,11 +4,12 @@ import { ARecord, HostedZone, IHostedZone, RecordTarget } from 'aws-cdk-lib/aws-
 import { ApiGateway } from 'aws-cdk-lib/aws-route53-targets';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 import { Construct } from 'constructs';
+import { CERTIFICATE_ARN, ENVIRONMENT } from './config';
 
 export class Foundation {
   readonly apexDomain = 'koala-techs.com';
   readonly endorseMiDomain = `endorse-mi.${this.apexDomain}`;
-  readonly apiDomain = `api.${this.endorseMiDomain}`;
+  readonly apiDomain = `${ENVIRONMENT}.bff.${this.endorseMiDomain}`;
   readonly api: RestApi;
   readonly restResource: Resource;
   readonly authResource: Resource;
@@ -24,7 +25,7 @@ export class Foundation {
     this.userPoolArn = StringParameter.valueForStringParameter(scope, '/prod/infrastructure/user/cognito-user-pool-arn');
 
     this.api = new RestApi(scope, 'rest-api', {
-      restApiName: 'endorse-mi-bff-prod',
+      restApiName: `endorse-mi-bff-${ENVIRONMENT}`,
       defaultCorsPreflightOptions: {
         allowOrigins: Cors.ALL_ORIGINS,
         allowMethods: Cors.ALL_METHODS,
@@ -35,11 +36,7 @@ export class Foundation {
         // Determines where requests to the custom domain name will be routed to.
         // Here the requests will be routed to an endpoint at the edge location closest to the client.
         endpointType: EndpointType.EDGE,
-        certificate: Certificate.fromCertificateArn(
-          scope,
-          'api-cert',
-          'arn:aws:acm:us-east-1:223889111609:certificate/5ef81e63-5323-47da-8732-852fb899d1df'
-        ),
+        certificate: Certificate.fromCertificateArn(scope, 'api-cert', CERTIFICATE_ARN),
         securityPolicy: SecurityPolicy.TLS_1_2,
       },
       // Determines where the REST API will accept requests from.
@@ -49,7 +46,7 @@ export class Foundation {
         types: [EndpointType.REGIONAL],
       },
       deployOptions: {
-        stageName: 'prod',
+        stageName: ENVIRONMENT,
         tracingEnabled: true,
       },
     });
@@ -59,7 +56,7 @@ export class Foundation {
     this.graphqlResource = this.api.root.addResource('graphql');
 
     this.cognitoAuthorizer = new CfnAuthorizer(scope, 'cognito-authorizer', {
-      name: 'endorse-mi-cognito-authorizer-prod',
+      name: `endorse-mi-cognito-authorizer-${ENVIRONMENT}`,
       restApiId: this.api.restApiId,
       identitySource: 'method.request.header.Authorization',
       type: 'COGNITO_USER_POOLS',

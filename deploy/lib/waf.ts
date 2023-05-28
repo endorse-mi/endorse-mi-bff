@@ -1,5 +1,6 @@
 import { CfnWebACL, CfnWebACLAssociation } from 'aws-cdk-lib/aws-wafv2';
 import { Construct } from 'constructs';
+import { ENVIRONMENT } from './config';
 import { Foundation } from './foundation';
 import { rateLimitRuleFor } from './helpers/waf-rule';
 
@@ -12,20 +13,20 @@ export class Waf {
     // }
     const rules = [
       rateLimitRuleFor({
-        name: 'endorse-mi-bff-prod',
+        name: `endorse-mi-bff-${ENVIRONMENT}`,
         priority: 1,
         limit: 100,
       }),
     ];
 
     const webAcl = new CfnWebACL(scope, 'endorse-mi-bff-waf-acl', {
-      name: `endorse-mi-bff-waf-acl-prod`,
+      name: `endorse-mi-bff-waf-acl-${ENVIRONMENT}`,
       scope: 'REGIONAL',
       defaultAction: {
         allow: {},
       },
       visibilityConfig: {
-        metricName: `endorse-mi-bff-waf-acl-prod`,
+        metricName: `endorse-mi-bff-waf-acl-${ENVIRONMENT}`,
         cloudWatchMetricsEnabled: true,
         sampledRequestsEnabled: true,
       },

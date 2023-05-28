@@ -2,6 +2,7 @@ import { AuthorizationType, JsonSchemaType, JsonSchemaVersion, LambdaIntegration
 import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
+import { ENVIRONMENT } from '../../../config';
 import { Foundation } from '../../../foundation';
 import { functionPropsFor } from '../../../helpers/function-props';
 
@@ -9,7 +10,7 @@ export default function addSignUpEndpoint(scope: Construct, foundation: Foundati
   const lambda = new NodejsFunction(
     scope,
     'endorse-mi-bff-sign-up',
-    functionPropsFor({ name: 'endorse-mi-bff-sign-up-prod', description: 'Sign up', entry: 'rest/auth/sign-up.ts' })
+    functionPropsFor({ name: `endorse-mi-bff-sign-up-${ENVIRONMENT}`, description: 'Sign up', entry: 'rest/auth/sign-up.ts' })
   );
 
   const requestModel = foundation.api.addModel('sign-up-request', {

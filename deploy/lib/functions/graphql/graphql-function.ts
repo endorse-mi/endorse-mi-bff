@@ -2,6 +2,7 @@ import { AuthorizationType, LambdaIntegration } from 'aws-cdk-lib/aws-apigateway
 import { Effect, PolicyStatement } from 'aws-cdk-lib/aws-iam';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
+import { ENVIRONMENT } from '../../config';
 import { Foundation } from '../../foundation';
 import { functionPropsFor } from '../../helpers/function-props';
 
@@ -10,7 +11,7 @@ export class GraphqlFunction {
     const graphqlFunction = new NodejsFunction(
       scope,
       'graphql-function',
-      functionPropsFor({ name: 'endorse-mi-bff-graphql-prod', description: '', entry: 'graphql/index.ts' })
+      functionPropsFor({ name: `endorse-mi-bff-graphql-${ENVIRONMENT}`, description: '', entry: 'graphql/index.ts' })
     );
 
     graphqlFunction.addToRolePolicy(

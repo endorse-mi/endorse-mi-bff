@@ -1,6 +1,7 @@
 import { AuthorizationType, JsonSchemaType, JsonSchemaVersion, LambdaIntegration, RequestValidator } from 'aws-cdk-lib/aws-apigateway';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
+import { ENVIRONMENT } from '../../../config';
 import { Foundation } from '../../../foundation';
 import { functionPropsFor } from '../../../helpers/function-props';
 
@@ -9,7 +10,7 @@ export default function addConfirmSignInEndpoint(scope: Construct, foundation: F
     scope,
     'endorse-mi-bff-confirm-sign-up',
     functionPropsFor({
-      name: 'endorse-mi-bff-confirm-sign-up-prod',
+      name: `endorse-mi-bff-confirm-sign-up-${ENVIRONMENT}`,
       description: 'Confirm sign up by sending the verification code',
       entry: 'rest/auth/confirm-sign-up.ts',
     })
