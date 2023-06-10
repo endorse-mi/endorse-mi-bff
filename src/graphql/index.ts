@@ -9,6 +9,19 @@ const server = new ApolloServer({
   resolvers,
   csrfPrevention: true,
   introspection: ENVIRONMENT !== 'prod',
+  plugins: [
+    {
+      async requestDidStart() {
+        return {
+          async willSendResponse(requestContext) {
+            const { response } = requestContext;
+            response.http.headers.set('Access-Control-Allow-Methods', '*');
+            response.http.headers.set('Access-Control-Allow-Origin', '*');
+          },
+        };
+      },
+    },
+  ],
 });
 
 // createAPIGatewayProxyEventRequestHandler expects an event in the format used by the original version (i.e. RestApi) of API Gateway.
