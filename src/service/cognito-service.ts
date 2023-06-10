@@ -1,6 +1,7 @@
 import { AdminDeleteUserCommand, CognitoIdentityProviderClient } from '@aws-sdk/client-cognito-identity-provider';
 import { CognitoUser } from 'amazon-cognito-identity-js';
 import { Amplify, Auth } from 'aws-amplify';
+import { COGNITO_CLIENT_ID, COGNITO_POOL_ID } from '../environments';
 import { ConfirmSignUpRequest } from '../rest/auth/confirm-sign-up';
 import { ForgotPasswordRequest } from '../rest/auth/forgot-password';
 import { ForgotPasswordSubmitRequest } from '../rest/auth/forgot-password-submit';
@@ -8,10 +9,9 @@ import { SignInRequest } from '../rest/auth/sign-in';
 import { SignUpRequest } from '../rest/auth/sign-up';
 import userService from './user-service';
 
-const UserPoolId = 'us-east-1_Lys4ah2yx';
 const poolData = {
-  UserPoolId,
-  ClientId: '15mctmddp5onrd2t8ckbii3ro8',
+  UserPoolId: COGNITO_POOL_ID,
+  ClientId: COGNITO_CLIENT_ID,
 };
 
 Amplify.configure({
@@ -61,7 +61,7 @@ class CognitoService {
 
   deleteUser = async (userId: string) => {
     const command = new AdminDeleteUserCommand({
-      UserPoolId,
+      UserPoolId: COGNITO_POOL_ID,
       Username: userId,
     });
     return await this.cognitoClient.send(command);

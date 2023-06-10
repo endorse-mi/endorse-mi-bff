@@ -3,6 +3,7 @@ import { Runtime, Tracing } from 'aws-cdk-lib/aws-lambda';
 import { NodejsFunctionProps } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 import * as path from 'path';
+import { COGNITO_CLIENT_ID, COGNITO_POOL_ID } from '../config';
 
 type FunctionProps = {
   name: string;
@@ -29,6 +30,10 @@ export const functionPropsFor = ({ name, description, entry, memorySize = 512 }:
     bundling: {
       minify: true,
       externalModules: ['aws-sdk'],
+    },
+    environment: {
+      COGNITO_POOL_ID,
+      COGNITO_CLIENT_ID,
     },
   };
 };

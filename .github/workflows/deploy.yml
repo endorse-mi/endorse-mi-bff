@@ -7,6 +7,12 @@ on:
       CERTIFICATE_ARN:
         required: true
         type: string
+      COGNITO_POOL_ID:
+        required: true
+        type: string
+      COGNITO_CLIENT_ID:
+        required: true
+        type: string
     secrets:
       AWS_ACCESS_KEY_ID:
         required: true
@@ -22,6 +28,8 @@ jobs:
       AWS_REGION: us-east-1
       ENVIRONMENT: ${{ inputs.ENVIRONMENT }}
       CERTIFICATE_ARN: ${{ inputs.CERTIFICATE_ARN }}
+      COGNITO_POOL_ID: ${{ inputs.COGNITO_POOL_ID }}
+      COGNITO_CLIENT_ID: ${{ inputs.COGNITO_CLIENT_ID }}
 
     steps:
       - name: Checkout Repo
