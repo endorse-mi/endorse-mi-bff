@@ -1,5 +1,6 @@
 import { ApolloServer } from '@apollo/server';
 import { handlers, startServerAndCreateLambdaHandler } from '@as-integrations/aws-lambda';
+import { ENVIRONMENT } from '../environments';
 import { resolvers } from './resolver';
 import { typeDefs } from './schema';
 
@@ -7,8 +8,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   csrfPrevention: true,
-  // disable for prod
-  introspection: true,
+  introspection: ENVIRONMENT !== 'prod',
 });
 
 // createAPIGatewayProxyEventRequestHandler expects an event in the format used by the original version (i.e. RestApi) of API Gateway.
