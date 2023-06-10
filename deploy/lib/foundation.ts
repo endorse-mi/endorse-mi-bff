@@ -22,7 +22,7 @@ export class Foundation {
   readonly cognitoAuthorizer: CfnAuthorizer;
 
   constructor(scope: Construct) {
-    this.userPoolArn = StringParameter.valueForStringParameter(scope, '/prod/infrastructure/user/cognito-user-pool-arn');
+    this.userPoolArn = StringParameter.valueForStringParameter(scope, `/${ENVIRONMENT}/infrastructure/user/cognito-user-pool-arn`);
 
     this.api = new RestApi(scope, 'rest-api', {
       restApiName: `endorse-mi-bff-${ENVIRONMENT}`,
