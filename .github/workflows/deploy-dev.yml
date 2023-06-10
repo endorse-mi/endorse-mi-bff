@@ -11,7 +11,7 @@ jobs:
       ENVIRONMENT: dev
       CERTIFICATE_ARN: arn:aws:acm:us-east-1:223889111609:certificate/073fac82-28de-464b-b55b-60f6dd6997dc
       COGNITO_POOL_ID: us-east-1_zGeMYTP3n
-      COGNITO_CLIENT_ID: 58o9q4equ80v46pi66bu33jrqn
+      COGNITO_CLIENT_ID: 7a11hephgpidtphklon7vhit49
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
