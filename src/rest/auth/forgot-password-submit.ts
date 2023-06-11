@@ -16,7 +16,7 @@ export const handler = async (request) => {
       statusCode: 200,
       body: {
         success: true,
-        message: `Reset forgotten password for user ${forgotPasswordSubmitRequest.username}`,
+        message: `Reset password for user ${forgotPasswordSubmitRequest.username}`,
       },
     });
   } catch (err) {
