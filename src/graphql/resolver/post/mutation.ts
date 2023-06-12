@@ -9,7 +9,7 @@ export const createPost = async (parent, { input }: { input: PostCreateInput }, 
     const post = await postService.createPost(input);
     return {
       post,
-      message: `Created post ${context.userId}`,
+      message: 'New post created',
       success: true,
     };
   } catch (err) {
