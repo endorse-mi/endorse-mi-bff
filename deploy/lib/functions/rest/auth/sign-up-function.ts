@@ -33,7 +33,7 @@ export default function addSignUpEndpoint(scope: Construct, foundation: Foundati
     new PolicyStatement({
       effect: Effect.ALLOW,
       actions: ['dynamodb:PutItem'],
-      resources: ['arn:aws:dynamodb:us-east-1:223889111609:table/user-table-prod'],
+      resources: [`arn:aws:dynamodb:us-east-1:223889111609:table/user-table-${ENVIRONMENT}`],
     })
   );
 
