@@ -17,10 +17,11 @@ export class GraphqlFunction {
     graphqlFunction.addToRolePolicy(
       new PolicyStatement({
         effect: Effect.ALLOW,
-        actions: ['dynamodb:GetItem', 'dynamodb:PutItem', 'dynamodb:UpdateItem', 'dynamodb:DeleteItem'],
+        actions: ['dynamodb:Query', 'dynamodb:GetItem', 'dynamodb:PutItem', 'dynamodb:UpdateItem', 'dynamodb:DeleteItem'],
         resources: [
           `arn:aws:dynamodb:us-east-1:223889111609:table/user-table-${ENVIRONMENT}`,
           `arn:aws:dynamodb:us-east-1:223889111609:table/post-table-${ENVIRONMENT}`,
+          `arn:aws:dynamodb:us-east-1:223889111609:table/post-table-${ENVIRONMENT}/index/*`,
           `arn:aws:dynamodb:us-east-1:223889111609:table/post-interaction-table-${ENVIRONMENT}`,
         ],
       })
