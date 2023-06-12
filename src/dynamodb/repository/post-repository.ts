@@ -1,6 +1,7 @@
 import * as dynamoose from 'dynamoose';
 import { SortOrder } from 'dynamoose/dist/General';
 import { Model } from 'dynamoose/dist/Model';
+import { ENVIRONMENT } from '../../environments';
 import logger from '../../utils/logger';
 import { Post, PostLastKey, PostModel, PostType } from '../model/post-model';
 import { PostSchema } from '../schema/post-schema';
@@ -9,7 +10,7 @@ class PostRepository {
   private readonly postEntity: Model<PostModel>;
 
   constructor() {
-    this.postEntity = dynamoose.model<PostModel>('post-table-prod', PostSchema, { create: false, waitForActive: false });
+    this.postEntity = dynamoose.model<PostModel>(`post-table-${ENVIRONMENT}`, PostSchema, { create: false, waitForActive: false });
   }
 
   getPosts = async (type: PostType, startKey?: PostLastKey, limit = 10) => {

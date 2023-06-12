@@ -1,5 +1,6 @@
 import * as dynamoose from 'dynamoose';
 import { Model } from 'dynamoose/dist/Model';
+import { ENVIRONMENT } from '../../environments';
 import { INITIAL_BALANCE } from '../../service/balance-service';
 import { UserCreateInput, UserModel, UserUpdateInput } from '../model/user-model';
 import { UserSchema } from '../schema/user-schema';
@@ -9,7 +10,7 @@ class UserRepository {
 
   constructor() {
     // Set { create: false, waitForActive: false } so that the function doesn't need CreateTable and DescribeTable permissions.
-    this.userEntity = dynamoose.model<UserModel>('user-table-prod', UserSchema, { create: false, waitForActive: false });
+    this.userEntity = dynamoose.model<UserModel>(`user-table-${ENVIRONMENT}`, UserSchema, { create: false, waitForActive: false });
   }
 
   getUserById = async (id: string) => {
