@@ -7,9 +7,8 @@ import { Construct } from 'constructs';
 import { CERTIFICATE_ARN, ENVIRONMENT } from './config';
 
 export class Foundation {
-  readonly apexDomain = 'koala-techs.com';
-  readonly endorseMiDomain = `endorse-mi.${this.apexDomain}`;
-  readonly apiDomain = `${ENVIRONMENT}.bff.${this.endorseMiDomain}`;
+  readonly apexDomain = 'endorse-mi.com';
+  readonly apiDomain = `${ENVIRONMENT}.bff.${this.apexDomain}`;
   readonly api: RestApi;
   readonly restResource: Resource;
   readonly authResource: Resource;
@@ -64,7 +63,7 @@ export class Foundation {
     });
 
     this.zone = HostedZone.fromLookup(scope, 'hosted-zone', {
-      domainName: 'koala-techs.com',
+      domainName: 'endorse-mi.com',
     });
 
     this.apiGateway = new ApiGateway(this.api);

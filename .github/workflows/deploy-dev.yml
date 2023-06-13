@@ -9,7 +9,7 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     with:
       ENVIRONMENT: dev
-      CERTIFICATE_ARN: arn:aws:acm:us-east-1:223889111609:certificate/073fac82-28de-464b-b55b-60f6dd6997dc
+      CERTIFICATE_ARN: arn:aws:acm:us-east-1:223889111609:certificate/a7df4bf9-42ba-40d3-a273-cbe16c18acd1
       COGNITO_POOL_ID: us-east-1_ZJ4C1f0j0
       COGNITO_CLIENT_ID: 1ftkehm42cim9ulp92gkqhek50
     secrets:
