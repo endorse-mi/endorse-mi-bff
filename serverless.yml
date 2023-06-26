@@ -55,6 +55,14 @@ functions:
           method: POST
           cors: true
 
+  preview-posts:
+    handler: src/rest/preview-posts.handler
+    events:
+      - http:
+          path: /rest/preview-posts
+          method: GET
+          cors: true
+
   graphql:
     handler: src/graphql/index.handler
     events:

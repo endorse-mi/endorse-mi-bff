@@ -14,7 +14,7 @@ class PostRepository {
   }
 
   getPosts = async (type: PostType, startKey?: PostLastKey, limit = 10) => {
-    logger.debug({ startKey, limit }, 'PostRepository -> getPosts');
+    logger.debug({ type, startKey, limit }, 'PostRepository -> getPosts');
     if (startKey) {
       return await this.postEntity
         .query('type')
