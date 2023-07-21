@@ -1,3 +1,4 @@
+import { paymentSchemas } from './payment';
 import { postSchemas } from './post';
 import { postInteractionSchemas } from './post-interaction';
 import { userSchemas } from './user';
@@ -9,4 +10,4 @@ const commonSchema = `#graphql
   }
 `;
 
-export const typeDefs = [commonSchema, ...userSchemas, ...postSchemas, ...postInteractionSchemas];
+export const typeDefs = [commonSchema, ...userSchemas, ...postSchemas, ...postInteractionSchemas, ...paymentSchemas];

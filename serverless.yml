@@ -1,5 +1,7 @@
 service: apollo-lambda
 
+useDotenv: true
+
 package:
   individually: false
 
@@ -17,6 +19,8 @@ provider:
     ENVIRONMENT: dev
     COGNITO_POOL_ID: us-east-1_ZJ4C1f0j0
     COGNITO_CLIENT_ID: 1ftkehm42cim9ulp92gkqhek50
+    STRIPE_KEY: ${env:STRIPE_KEY}
+    WEBHOOK_SECRET: ${env:WEBHOOK_SECRET}
     WEB_APP_URL: http://localhost:8080
 
 functions:
@@ -66,6 +70,14 @@ functions:
       - http:
           path: /rest/preview-posts
           method: GET
+          cors: true
+
+  stripe-webhook:
+    handler: src/rest/payment/stripe-webhook.handler
+    events:
+      - http:
+          path: /rest/payment/stripe-webhook
+          method: POST
           cors: true
 
   graphql:

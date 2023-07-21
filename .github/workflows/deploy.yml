@@ -13,10 +13,15 @@ on:
       COGNITO_CLIENT_ID:
         required: true
         type: string
+      WEB_APP_URL:
+        required: true
+        type: string
     secrets:
       AWS_ACCESS_KEY_ID:
         required: true
       AWS_SECRET_ACCESS_KEY:
+        required: true
+      STRIPE_KEY:
         required: true
 
 jobs:
@@ -25,11 +30,13 @@ jobs:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      STRIPE_KEY: ${{ secrets.STRIPE_KEY }}
       AWS_REGION: us-east-1
       ENVIRONMENT: ${{ inputs.ENVIRONMENT }}
       CERTIFICATE_ARN: ${{ inputs.CERTIFICATE_ARN }}
       COGNITO_POOL_ID: ${{ inputs.COGNITO_POOL_ID }}
       COGNITO_CLIENT_ID: ${{ inputs.COGNITO_CLIENT_ID }}
+      WEB_APP_URL: ${{ inputs.WEB_APP_URL }}
 
     steps:
       - name: Checkout Repo

@@ -12,6 +12,7 @@ export class Foundation {
   readonly api: RestApi;
   readonly restResource: Resource;
   readonly authResource: Resource;
+  readonly paymentResource: Resource;
   readonly graphqlResource: Resource;
   readonly apiGateway: ApiGateway;
   readonly zone: IHostedZone;
@@ -52,6 +53,7 @@ export class Foundation {
 
     this.restResource = this.api.root.addResource('rest');
     this.authResource = this.restResource.addResource('auth');
+    this.paymentResource = this.restResource.addResource('payment');
     this.graphqlResource = this.api.root.addResource('graphql');
 
     this.cognitoAuthorizer = new CfnAuthorizer(scope, 'cognito-authorizer', {

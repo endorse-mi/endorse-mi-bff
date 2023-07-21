@@ -23,6 +23,7 @@
     "dynamoose": "^3.2.0",
     "graphql": "^16.6.0",
     "pino": "^8.11.0",
+    "stripe": "^12.9.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

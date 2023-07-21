@@ -12,6 +12,8 @@ jobs:
       CERTIFICATE_ARN: arn:aws:acm:us-east-1:223889111609:certificate/55df4e17-42fc-4494-9fc5-77feb8c4905a
       COGNITO_POOL_ID: us-east-1_cLQYvqa1Q
       COGNITO_CLIENT_ID: 4pq7t40des9qqm9htoimoip9np
+      WEB_APP_URL: https://www.endorse-mi.com
     secrets:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      STRIPE_KEY: ${{ secrets.PROD_STRIPE_KEY }}
