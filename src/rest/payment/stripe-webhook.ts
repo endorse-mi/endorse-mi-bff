@@ -1,4 +1,6 @@
 import { STRIPE_KEY, WEBHOOK_SECRET } from '../../environments';
+import { PRICE_IDS } from '../../graphql/resolver/payment/mutation';
+import balanceService from '../../service/balance-service';
 import { commonResponseFor } from '../utils/common';
 
 const stripe = require('stripe')(STRIPE_KEY);
@@ -19,7 +21,10 @@ exports.handler = async function (event) {
   switch (eventType) {
     case 'checkout.session.completed':
       console.log('checkout.session.completed');
-      console.log(stripeEvent.data.object.metadata.userId);
+      // TODO
+      const userId = stripeEvent.data.object.metadata.userId;
+      const priceId = stripeEvent.data.object.metadata.priceId;
+      await balanceService.changeUserBalance(userId, PRICE_IDS[priceId]);
       break;
     case 'checkout.session.async_payment_succeeded':
       console.log('checkout.session.async_payment_succeeded');
