@@ -7,6 +7,7 @@ export const ENDORSEMENT_POST_COST = -100;
 export const RECOMMENDATION_POST_COST = -1000;
 export const ENDORSEMENT_POST_AWARD = 25;
 export const RECOMMENDATION_POST_AWARD = 500;
+export const INVITATION_AWARD = 25;
 
 class BalanceService {
   changeUserBalance = async (userId: string, value: number) => {

@@ -4,6 +4,7 @@ import { commonResponseFor } from '../utils/common';
 export interface ConfirmSignUpRequest {
   username: string;
   code: string;
+  invitorId: string;
 }
 
 export const handler = async (request) => {

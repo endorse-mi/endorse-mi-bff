@@ -7,6 +7,7 @@ import { ForgotPasswordRequest } from '../rest/auth/forgot-password';
 import { ForgotPasswordSubmitRequest } from '../rest/auth/forgot-password-submit';
 import { SignInRequest } from '../rest/auth/sign-in';
 import { SignUpRequest } from '../rest/auth/sign-up';
+import balanceService, { INVITATION_AWARD } from './balance-service';
 import userService from './user-service';
 
 const poolData = {
@@ -44,8 +45,15 @@ class CognitoService {
     return user;
   };
 
-  confirmSignUp = async ({ username, code }: ConfirmSignUpRequest) => {
+  confirmSignUp = async ({ username, code, invitorId }: ConfirmSignUpRequest) => {
     await Auth.confirmSignUp(username, code);
+    try {
+      const user = await userService.getUserById(invitorId);
+      if (user && username !== invitorId) {
+        await balanceService.changeUserBalance(invitorId, INVITATION_AWARD);
+        await balanceService.changeUserBalance(username, INVITATION_AWARD);
+      }
+    } catch (err) {}
     console.log('confirmed sign up');
   };
 

@@ -24,6 +24,7 @@ export default function addConfirmSignInEndpoint(scope: Construct, foundation: F
       properties: {
         username: { type: JsonSchemaType.STRING },
         code: { type: JsonSchemaType.STRING },
+        invitorId: { type: JsonSchemaType.STRING },
       },
       required: ['username', 'code'],
     },
