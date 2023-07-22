@@ -23,20 +23,23 @@ on:
         required: true
       STRIPE_KEY:
         required: true
+      WEBHOOK_SECRET:
+        required: true
 
 jobs:
   deploy-bff:
     runs-on: ubuntu-latest
     env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      STRIPE_KEY: ${{ secrets.STRIPE_KEY }}
       AWS_REGION: us-east-1
       ENVIRONMENT: ${{ inputs.ENVIRONMENT }}
       CERTIFICATE_ARN: ${{ inputs.CERTIFICATE_ARN }}
       COGNITO_POOL_ID: ${{ inputs.COGNITO_POOL_ID }}
       COGNITO_CLIENT_ID: ${{ inputs.COGNITO_CLIENT_ID }}
       WEB_APP_URL: ${{ inputs.WEB_APP_URL }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      STRIPE_KEY: ${{ secrets.STRIPE_KEY }}
+      WEB_HOOK_SECRET: ${{ secrets.WEB_HOOK_SECRET }}
 
     steps:
       - name: Checkout Repo
