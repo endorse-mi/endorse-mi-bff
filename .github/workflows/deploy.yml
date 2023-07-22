@@ -39,7 +39,7 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       STRIPE_KEY: ${{ secrets.STRIPE_KEY }}
-      WEB_HOOK_SECRET: ${{ secrets.WEB_HOOK_SECRET }}
+      WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
 
     steps:
       - name: Checkout Repo

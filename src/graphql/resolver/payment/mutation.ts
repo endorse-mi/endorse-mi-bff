@@ -16,6 +16,9 @@ export const createCheckoutSession = async (parent, { priceId }: { priceId: stri
         quantity: 1,
       },
     ],
+    metadata: {
+      userId: context.userId,
+    },
     mode: 'payment',
     success_url: `${WEB_APP_URL}/store?status=success`,
     cancel_url: `${WEB_APP_URL}/store?status=fail`,

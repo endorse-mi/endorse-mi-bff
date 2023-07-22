@@ -16,7 +16,7 @@ export default function addStripWebhookEndpoint(scope: Construct, foundation: Fo
     })
   );
 
-  foundation.restResource.addResource('stripe-webhook').addMethod('POST', new LambdaIntegration(lambda), {
+  foundation.paymentResource.addResource('stripe-webhook').addMethod('POST', new LambdaIntegration(lambda), {
     authorizationType: AuthorizationType.NONE,
   });
 }
