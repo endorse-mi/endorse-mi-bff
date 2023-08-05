@@ -14,3 +14,5 @@ yarn-error.log
 # CDK asset staging directory
 .cdk.staging
 cdk.out
+
+coverage

@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "serve": "serverless offline start --reloadHandler | pino-pretty",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest --coverage",
     "lint": "eslint \"./**/*.{js,ts}\" --fix",
     "format": "prettier \"./**/*.{js,ts}\" --write --config ./.prettierrc"
   },
@@ -29,6 +29,7 @@
   "devDependencies": {
     "@types/node": "^18.15.0",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
+    "@vitest/coverage-v8": "^0.34.1",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.7.0",
     "eslint-config-standard-with-typescript": "^34.0.0",
@@ -42,6 +43,7 @@
     "serverless-bundle": "^6.0.0",
     "serverless-offline": "^12.0.4",
     "serverless-plugin-typescript": "^2.1.4",
-    "typescript": "^4.4.0"
+    "typescript": "^4.4.0",
+    "vitest": "^0.34.1"
   }
 }
