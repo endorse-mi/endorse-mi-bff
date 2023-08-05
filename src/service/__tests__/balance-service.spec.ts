@@ -75,7 +75,7 @@ describe('balance-service', () => {
       vi.spyOn(balanceService, 'purchaseEndorsementPost');
       await balanceService.purchasePost(USER_ID, PostType.ENDORSE);
 
-      expect(balanceService.purchaseEndorsementPost).toBeCalled();
+      expect(balanceService.purchaseEndorsementPost).toBeCalledWith(USER_ID);
     });
 
     it('should purchase recommendation post', async () => {
@@ -83,7 +83,7 @@ describe('balance-service', () => {
       vi.spyOn(userService, 'getUserBalanceById').mockResolvedValueOnce(1000);
       await balanceService.purchasePost(USER_ID, PostType.RECOMMEND);
 
-      expect(balanceService.purchaseRecommendationPost).toBeCalled();
+      expect(balanceService.purchaseRecommendationPost).toBeCalledWith(USER_ID);
     });
   });
 
@@ -110,7 +110,7 @@ describe('balance-service', () => {
       vi.spyOn(balanceService, 'rewardEndorsementPost');
       await balanceService.rewardPost(USER_ID, PostType.ENDORSE);
 
-      expect(balanceService.rewardEndorsementPost).toBeCalled();
+      expect(balanceService.rewardEndorsementPost).toBeCalledWith(USER_ID);
     });
 
     it('should reward recommendation post', async () => {
@@ -118,7 +118,7 @@ describe('balance-service', () => {
       vi.spyOn(userService, 'getUserBalanceById').mockResolvedValueOnce(1000);
       await balanceService.rewardPost(USER_ID, PostType.RECOMMEND);
 
-      expect(balanceService.rewardRecommendationPost).toBeCalled();
+      expect(balanceService.rewardRecommendationPost).toBeCalledWith(USER_ID);
     });
   });
 });
