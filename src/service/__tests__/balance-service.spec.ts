@@ -1,4 +1,3 @@
-import { describe, expect, it } from 'vitest';
 import { PostType } from '../../dynamodb/model/post-model';
 import userRepository from '../../dynamodb/repository/user-repository';
 import { USER_ID } from '../../__tests__/fixture';

@@ -8,8 +8,20 @@ import balanceService from './balance-service';
 
 dayjs.extend(utc);
 
-const ENDORSEMENT_POST_QUOTA = 3;
-const RECOMMENDATION_POST_QUOTA = 1;
+export const ENDORSEMENT_POST_QUOTA = 3;
+export const RECOMMENDATION_POST_QUOTA = 1;
+
+export const toPost = (request: PostCreateInput) => {
+  const quota = request.type === PostType.ENDORSE ? ENDORSEMENT_POST_QUOTA : RECOMMENDATION_POST_QUOTA;
+  return {
+    ...request,
+    postId: uuidv4(),
+    maxQuota: quota,
+    remainingQuota: quota,
+    nConfirmed: 0,
+    TTL: dayjs().add(5, 'month').toDate().getTime() / 1000,
+  };
+};
 
 class PostService {
   getPosts = async (type: PostType, startKey?: PostLastKey) => {
@@ -27,24 +39,12 @@ class PostService {
 
   createPost = async (request: PostCreateInput) => {
     await balanceService.purchasePost(request.authorId, request.type);
-    const post = this.toPost(request);
+    const post = toPost(request);
     return await postRepository.createPost(post);
   };
 
   deletePost = async (id: string) => {
     await postRepository.deletePost(id);
-  };
-
-  private readonly toPost = (request: PostCreateInput) => {
-    const quota = request.type === PostType.ENDORSE ? ENDORSEMENT_POST_QUOTA : RECOMMENDATION_POST_QUOTA;
-    return {
-      ...request,
-      postId: uuidv4(),
-      maxQuota: quota,
-      remainingQuota: quota,
-      nConfirmed: 0,
-      TTL: dayjs().add(5, 'month').toDate().getTime() / 1000,
-    };
   };
 }
 
